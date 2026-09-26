@@ -260,7 +260,14 @@
     });
 
     sb.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN') {
+      if (event === 'PASSWORD_RECOVERY') {
+        // Потребителят е дошъл от линк "Забравена парола" -> показваме форма за нова парола
+        authOverlay.classList.remove('hidden');
+        authFormBox.classList.add('hidden');
+        document.getElementById('recoveryFormBox').classList.remove('hidden');
+        document.getElementById('authGoToFormBtn').classList.add('hidden');
+        document.getElementById('themeSwitcherBtnPreauth').classList.add('hidden');
+      } else if (event === 'SIGNED_IN') {
         currentUser = session.user;
         loadFromCloud().then(startApp);
       } else if (event === 'SIGNED_OUT') {
@@ -269,7 +276,47 @@
       }
     });
 
+    // Форма за нова парола (след линк "Забравена парола")
+    const recoveryPassword = document.getElementById('recoveryPassword');
+    const recoveryError = document.getElementById('recoveryError');
+    const recoveryNote = document.getElementById('recoveryNote');
+
+    const RECOVERY_EYE_OPEN = EYE_OPEN_SVG;
+    const RECOVERY_EYE_CLOSED = EYE_CLOSED_SVG;
+    const recoveryEyeBtn = document.getElementById('recoveryEyeBtn');
+    recoveryEyeBtn.innerHTML = RECOVERY_EYE_CLOSED;
+    recoveryEyeBtn.addEventListener('click', () => {
+      const isHidden = recoveryPassword.type === 'password';
+      recoveryPassword.type = isHidden ? 'text' : 'password';
+      recoveryEyeBtn.innerHTML = isHidden ? RECOVERY_EYE_OPEN : RECOVERY_EYE_CLOSED;
+      recoveryEyeBtn.classList.toggle('active', isHidden);
+    });
+
+    async function submitNewPassword() {
+      recoveryError.textContent = '';
+      recoveryNote.textContent = '';
+      const newPass = recoveryPassword.value;
+      if (!newPass || newPass.length < 6) {
+        recoveryError.textContent = 'Паролата трябва да е поне 6 символа.';
+        return;
+      }
+      const { error } = await sb.auth.updateUser({ password: newPass });
+      if (error) { recoveryError.textContent = 'Грешка: ' + error.message; return; }
+      recoveryNote.textContent = 'Паролата е сменена успешно! Влизаш автоматично...';
+      setTimeout(() => location.reload(), 1200);
+    }
+
+    document.getElementById('recoverySubmitBtn').addEventListener('click', submitNewPassword);
+    recoveryPassword.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); submitNewPassword(); }
+    });
+
+    // Ако линкът е за възстановяване на парола (type=recovery в hash-а),
+    // не стартираме автоматично приложението - изчакваме onAuthStateChange('PASSWORD_RECOVERY')
+    const isRecoveryLink = /type=recovery/.test(window.location.hash);
+
     (async function initAuth() {
+      if (isRecoveryLink) return;
       const { data: { session } } = await sb.auth.getSession();
       if (session) {
         currentUser = session.user;
