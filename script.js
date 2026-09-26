@@ -4,9 +4,9 @@
       localStorage.setItem('bday_planner_theme', themeName);
       const btn = document.getElementById('themeSwitcherBtn');
       if (themeName === 'sakura') {
-        btn.textContent = '🌊 Превключи на Морска';
+        btn.textContent = '🐬 Промени темата';
       } else {
-        btn.textContent = '🌸 Превключи на Сакура';
+        btn.textContent = '🌸 Промени темата';
       }
     }
 
@@ -157,7 +157,10 @@
     }
 
     function startApp() {
+      document.body.classList.remove('pre-auth');
       document.getElementById('authOverlay').classList.add('hidden');
+      document.getElementById('authGoToFormBtn').classList.add('hidden');
+      document.getElementById('themeSwitcherBtnPreauth').classList.add('hidden');
       notesArea.value = appData.notes || '';
       renderCalendar();
       renderReminders();
@@ -165,12 +168,38 @@
     }
 
     const authOverlay = document.getElementById('authOverlay');
+    const authFormBox = document.getElementById('authFormBox');
     const authEmail = document.getElementById('authEmail');
     const authPassword = document.getElementById('authPassword');
     const authError = document.getElementById('authError');
     const authNote = document.getElementById('authNote');
 
-    document.getElementById('authLoginBtn').addEventListener('click', async () => {
+    // Малкият бутон "ВХОД" горе вдясно отваря формата за вход
+    document.getElementById('authGoToFormBtn').addEventListener('click', () => {
+      authOverlay.classList.remove('hidden');
+      authEmail.focus();
+    });
+
+    // Назад: затваря формата (overlay-я)
+    document.getElementById('authBackBtn').addEventListener('click', () => {
+      authError.textContent = '';
+      authNote.textContent = '';
+      authOverlay.classList.add('hidden');
+    });
+
+    // Показване / скриване на паролата (иконка "око", в стил на браузъра)
+    const EYE_OPEN_SVG = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 12S5 5 12 5s10.5 7 10.5 7-3.5 7-10.5 7S1.5 12 1.5 12Z"/><circle cx="12" cy="12" r="3"/></svg>';
+    const EYE_CLOSED_SVG = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"/><path d="M10.6 5.2A10.9 10.9 0 0 1 12 5c7 0 10.5 7 10.5 7a13.4 13.4 0 0 1-3.1 4.1M6.6 6.6C3.4 8.4 1.5 12 1.5 12s3.5 7 10.5 7a10.4 10.4 0 0 0 4.2-.9"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>';
+    const eyeBtn = document.getElementById('passwordEyeBtn');
+    eyeBtn.innerHTML = EYE_CLOSED_SVG;
+    eyeBtn.addEventListener('click', () => {
+      const isHidden = authPassword.type === 'password';
+      authPassword.type = isHidden ? 'text' : 'password';
+      eyeBtn.innerHTML = isHidden ? EYE_OPEN_SVG : EYE_CLOSED_SVG;
+      eyeBtn.classList.toggle('active', isHidden);
+    });
+
+    async function doLogin() {
       authError.textContent = '';
       authNote.textContent = '';
       const email = authEmail.value.trim();
@@ -178,6 +207,16 @@
       if (!email || !password) { authError.textContent = 'Попълни имейл и парола.'; return; }
       const { error } = await sb.auth.signInWithPassword({ email, password });
       if (error) authError.textContent = 'Грешка: ' + error.message;
+    }
+
+    document.getElementById('authLoginBtn').addEventListener('click', doLogin);
+
+    // Enter в имейл или парола -> вход
+    authEmail.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); doLogin(); }
+    });
+    authPassword.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); doLogin(); }
     });
 
     document.getElementById('authSignupBtn').addEventListener('click', async () => {
@@ -194,7 +233,23 @@
       authNote.textContent = 'Готово! Провери имейла си за линк за потвърждение, после влез с бутона "Вход".';
     });
 
+    // Забравена парола -> изпращане на линк за възстановяване
+    document.getElementById('forgotPasswordLink').addEventListener('click', async (e) => {
+      e.preventDefault();
+      authError.textContent = '';
+      authNote.textContent = '';
+      const email = authEmail.value.trim();
+      if (!email) { authError.textContent = 'Въведи първо имейла си, за да изпратим линк за възстановяване.'; return; }
+      const { error } = await sb.auth.resetPasswordForEmail(email);
+      if (error) { authError.textContent = 'Грешка: ' + error.message; return; }
+      authNote.textContent = 'Изпратихме линк за смяна на паролата на ' + email + '.';
+    });
+
     document.getElementById('logoutBtn').addEventListener('click', () => {
+      if (isRadioPlaying) {
+        radioIframe.src = "about:blank";
+        isRadioPlaying = false;
+      }
       sb.auth.signOut();
     });
 

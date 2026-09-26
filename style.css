@@ -180,7 +180,148 @@
       border: 1px solid var(--primary-text);
     }
 
+    .auth-btn-back {
+      width: 100%;
+      border: none;
+      background: transparent;
+      color: var(--ink-soft);
+      font-size: 12.5px;
+      font-family: inherit;
+      cursor: pointer;
+      padding: 8px;
+      margin-top: 4px;
+    }
+
+    .auth-btn-back:hover {
+      color: var(--primary-text);
+    }
+
+    .auth-box.hidden {
+      display: none;
+    }
+
+    /* Поле за парола с иконка "око" */
+    .password-field-wrap {
+      position: relative;
+      margin-bottom: 10px;
+    }
+
+    .password-field-wrap input {
+      padding-right: 46px;
+      margin-bottom: 0;
+    }
+
+    /* Скрива вградената иконка "покажи парола" на Edge/Chrome,
+       за да остане видима само нашата собствена иконка */
+    .password-field-wrap input::-ms-reveal,
+    .password-field-wrap input::-ms-clear {
+      display: none;
+    }
+
+    .password-field-wrap input::-webkit-credentials-auto-fill-button,
+    .password-field-wrap input::-webkit-strong-password-auto-fill-button {
+      display: none !important;
+      visibility: hidden;
+      pointer-events: none;
+      position: absolute;
+      right: 0;
+    }
+
+    .password-eye-btn {
+      position: absolute;
+      top: 50%;
+      right: 8px;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      padding: 0;
+      color: var(--ink-soft);
+      opacity: 0.75;
+      transition: opacity 0.15s ease, color 0.15s ease;
+    }
+
+    .password-eye-btn svg {
+      width: 17px;
+      height: 17px;
+    }
+
+    .password-eye-btn:hover,
+    .password-eye-btn.active {
+      opacity: 1;
+      color: var(--primary-text);
+    }
+
+    .forgot-password-row {
+      text-align: right;
+      margin: 8px 0 4px;
+    }
+
+    .forgot-password-row a {
+      font-size: 12px;
+      color: var(--primary-text);
+      text-decoration: none;
+      opacity: 0.85;
+    }
+
+    .forgot-password-row a:hover {
+      text-decoration: underline;
+      opacity: 1;
+    }
+
     /* Бутон за превключване на темите */
+    /* Скрива съдържанието на приложението, докато не е потвърдена сесията / не е логнат */
+    body.pre-auth header.hero,
+    body.pre-auth .wrap,
+    body.pre-auth footer,
+    body.pre-auth .theme-switcher-container,
+    body.pre-auth .scroll-top-btn {
+      display: none !important;
+    }
+
+    .auth-corner-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1500;
+      background: var(--primary-text);
+      color: #fff;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 20px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transition: all 0.2s ease;
+    }
+
+    .auth-corner-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .auth-corner-btn.hidden {
+      display: none;
+    }
+
+    .theme-btn-corner {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1500;
+    }
+
+    .theme-btn-corner.hidden {
+      display: none;
+    }
+
     .theme-switcher-container {
       position: fixed;
       top: 20px;

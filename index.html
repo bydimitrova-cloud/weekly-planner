@@ -14,28 +14,47 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
-<body>
+<body class="pre-auth">
 
   <div class="page-bg" aria-hidden="true"></div>
 
+  <!-- Малък бутон за вход (горе вдясно), докато потребителят не е логнат -->
+  <button class="auth-corner-btn" id="authGoToFormBtn">Вход за потребители</button>
+
+  <!-- Бутон за смяна на темата (долу вдясно), докато потребителят не е логнат -->
+  <button class="theme-btn theme-btn-corner" id="themeSwitcherBtnPreauth" onclick="toggleTheme()">Промени темата</button>
+
+  <!-- Бутон за смяна на темата (долу вдясно), докато потребителят не е логнат -->
+  <button class="theme-btn theme-btn-corner" id="themeSwitcherBtnPreauth" onclick="toggleTheme()">Промени темата</button>
+
   <!-- Екран за вход / регистрация -->
-  <div class="auth-overlay" id="authOverlay">
-    <div class="auth-box">
+  <div class="auth-overlay hidden" id="authOverlay">
+
+    <!-- Форма за въвеждане на имейл и парола -->
+    <div class="auth-box auth-form-box" id="authFormBox">
       <h2>Личен седмичен планер</h2>
       <p class="auth-subtitle">Влез или се регистрирай, за да виждаш планера си на всяко устройство.</p>
       <input type="email" id="authEmail" placeholder="Имейл" autocomplete="email">
-      <input type="password" id="authPassword" placeholder="Парола (мин. 6 символа)" autocomplete="current-password">
+      <div class="password-field-wrap">
+        <input type="password" id="authPassword" placeholder="Парола (мин. 6 символа)" autocomplete="current-password">
+        <button type="button" class="password-eye-btn" id="passwordEyeBtn" title="Покажи/скрий паролата" aria-label="Покажи/скрий паролата"></button>
+      </div>
+      <div class="forgot-password-row">
+        <a href="#" id="forgotPasswordLink">Забравена парола?</a>
+      </div>
       <div class="auth-error" id="authError"></div>
       <div class="auth-note" id="authNote"></div>
       <button class="auth-btn-primary" id="authLoginBtn">Вход</button>
       <button class="auth-btn-secondary" id="authSignupBtn">Регистрация</button>
+      <button class="auth-btn-back" id="authBackBtn">‹ Назад</button>
     </div>
+
   </div>
 
-  <!-- Бутон за смяна на темата -->
+  <!-- Бутон за смяна на темата (вътре в приложението) -->
   <div class="theme-switcher-container">
     <button class="theme-btn" id="themeSwitcherBtn" onclick="toggleTheme()">🌸 Сакура / 🌊 Морска</button>
-    <button class="theme-btn" id="logoutBtn">⎋ Изход</button>
+    <button class="theme-btn" id="logoutBtn">Изход</button>
   </div>
 
   <header class="hero">
@@ -68,7 +87,7 @@
           <button class="radio-btn" id="radioPlayBtn" title="Включи / Изключи">▶</button>
           <span class="radio-status" id="radioStatus">Спряно</span>
         </div>
-        <iframe class="hidden-radio-frame" id="radioIframe" src="https://radiohype.gr/live/zucca"
+        <iframe class="hidden-radio-frame" id="radioIframe" src="about:blank"
           allow="autoplay"></iframe>
       </div>
     </div>
