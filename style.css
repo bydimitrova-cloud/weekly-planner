@@ -1,4 +1,4 @@
-    /* === ТЕМИ (SAKURA & SEA) === */
+/* === ТЕМИ (SAKURA & SEA) === */
     :root[data-theme="sakura"] {
       --em-title-color: #e77f97;
       --bg-image-url: url("https://wallpapershome.com/images/pages/pic_h/25872.jpg");
@@ -87,6 +87,40 @@
       position: absolute;
       inset: 0;
       background: linear-gradient(160deg, rgba(255, 255, 255, var(--bg-overlay-opacity)) 0%, rgba(240, 240, 240, var(--bg-overlay-opacity)) 100%);
+    }
+
+    /* Стил за текста в долния ляв ъгъл на началната страница */
+.corner-planning-quote {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  z-index: 1500;
+  max-width: 900px;
+  font-family: 'Cinzel', serif;
+  font-size: 60px;
+  font-weight: 700;
+  font-style: italic;
+  color: #f1efef;
+  line-height: 1.25;
+  /* Многопластова, силна сянка и черен контур за максимален отпечатък */
+  text-shadow: 
+    0 2px 5px rgba(0, 0, 0, 1), 
+    0 0 15px rgba(0, 0, 0, 0.9), 
+    0 0 30px rgba(0, 0, 0, 0.8),
+    2px 2px 0px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
+
+    /* Скрива текста след като потребителят влезе в системата */
+    body:not(.pre-auth) .corner-planning-quote {
+      display: none !important;
+    }
+
+    /* Скрива се на мобилни екрани, за да не затрупва изгледа */
+    @media (max-width: 768px) {
+      .corner-planning-quote {
+        display: none;
+      }
     }
 
     /* Екран за вход / регистрация */
@@ -274,8 +308,7 @@
       opacity: 1;
     }
 
-    /* Бутон за превключване на темите */
-    /* Скрива съдържанието на приложението, докато не е потвърдена сесията / не е логнат */
+    /* Скрива съдържанието на приложението, докато не е потвърдена сесията / не е логнат[cite: 2] */
     body.pre-auth header.hero,
     body.pre-auth .wrap,
     body.pre-auth footer,
