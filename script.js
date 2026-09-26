@@ -228,7 +228,11 @@
         authError.textContent = 'Имейл и парола (мин. 6 символа) са задължителни.';
         return;
       }
-      const { error } = await sb.auth.signUp({ email, password });
+      const { error } = await sb.auth.signUp({
+        email,
+        password,
+        options: { emailRedirectTo: 'https://bydimitrova-cloud.github.io/weekly-planner/' }
+      });
       if (error) { authError.textContent = 'Грешка: ' + error.message; return; }
       authNote.textContent = 'Готово! Провери имейла си за линк за потвърждение, после влез с бутона "Вход".';
     });
@@ -240,7 +244,9 @@
       authNote.textContent = '';
       const email = authEmail.value.trim();
       if (!email) { authError.textContent = 'Въведи първо имейла си, за да изпратим линк за възстановяване.'; return; }
-      const { error } = await sb.auth.resetPasswordForEmail(email);
+      const { error } = await sb.auth.resetPasswordForEmail(email, {
+        redirectTo: 'https://bydimitrova-cloud.github.io/weekly-planner/'
+      });
       if (error) { authError.textContent = 'Грешка: ' + error.message; return; }
       authNote.textContent = 'Изпратихме линк за смяна на паролата на ' + email + '.';
     });
