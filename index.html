@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="bg" data-theme="sakura">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Личен седмичен планер</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Poppins:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+  <div class="page-bg" aria-hidden="true"></div>
+
+  <!-- Екран за вход / регистрация -->
+  <div class="auth-overlay" id="authOverlay">
+    <div class="auth-box">
+      <h2>Личен седмичен планер</h2>
+      <p class="auth-subtitle">Влез или се регистрирай, за да виждаш планера си на всяко устройство.</p>
+      <input type="email" id="authEmail" placeholder="Имейл" autocomplete="email">
+      <input type="password" id="authPassword" placeholder="Парола (мин. 6 символа)" autocomplete="current-password">
+      <div class="auth-error" id="authError"></div>
+      <div class="auth-note" id="authNote"></div>
+      <button class="auth-btn-primary" id="authLoginBtn">Вход</button>
+      <button class="auth-btn-secondary" id="authSignupBtn">Регистрация</button>
+    </div>
+  </div>
+
+  <!-- Бутон за смяна на темата -->
+  <div class="theme-switcher-container">
+    <button class="theme-btn" id="themeSwitcherBtn" onclick="toggleTheme()">🌸 Сакура / 🌊 Морска</button>
+    <button class="theme-btn" id="logoutBtn">⎋ Изход</button>
+  </div>
+
+  <header class="hero">
+    <h1 class="title">Личен <em>седмичен планер</em></h1>
+
+    <div class="top-row-container">
+      <div class="daily-quote-box" id="quoteBox">
+        <div>
+          <span class="quote-icon">❝</span>
+          <p id="quoteText">Зареди се с усмивка - днешният ден носи нови възможности за успех и спокойствие.</p>
+        </div>
+        <div class="quote-footer" id="quoteAuthor">Източник на вдъхновението</div>
+      </div>
+
+      <div class="live-clock-box">
+        <span class="clock-icon">📅</span>
+        <div class="clock-info">
+          <div class="clock-date" id="liveDate">--</div>
+          <div class="clock-time" id="liveTime">--:--:--</div>
+        </div>
+      </div>
+
+      <div class="player-card-inline">
+        <div class="player-art">🎜</div>
+        <div class="player-info">
+          <div class="eyebrow-small">Любимото радио</div>
+          <h3>Zucca Radio</h3>
+        </div>
+        <div class="radio-control-box">
+          <button class="radio-btn" id="radioPlayBtn" title="Включи / Изключи">▶</button>
+          <span class="radio-status" id="radioStatus">Спряно</span>
+        </div>
+        <iframe class="hidden-radio-frame" id="radioIframe" src="https://radiohype.gr/live/zucca"
+          allow="autoplay"></iframe>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+  </header>
+
+  <div class="wrap">
+    <section id="planner">
+      <div class="card">
+        <div class="months-quick-bar" id="monthsBar">
+          <div class="month-pill" data-month="0">Януари</div>
+          <div class="month-pill" data-month="1">Февруари</div>
+          <div class="month-pill" data-month="2">Март</div>
+          <div class="month-pill" data-month="3">Април</div>
+          <div class="month-pill" data-month="4">Май</div>
+          <div class="month-pill" data-month="5">Юни</div>
+          <div class="month-pill" data-month="6">Юли</div>
+          <div class="month-pill" data-month="7">Август</div>
+          <div class="month-pill" data-month="8">Септември</div>
+          <div class="month-pill" data-month="9">Октомври</div>
+          <div class="month-pill" data-month="10">Ноември</div>
+          <div class="month-pill" data-month="11">Декември</div>
+        </div>
+
+        <div class="planner-top-bar">
+          <div class="planner-title-range">
+            <span>Период от: <strong id="startDateDisplay" class="date-highlight">--.--.----</strong></span>
+            <span>до <strong id="endDateLbl" class="date-highlight">--.--.----</strong></span>
+          </div>
+          <div class="week-nav-btns">
+            <button id="prevWeekBtn">‹ Предишна</button>
+            <button id="currentWeekBtn">Тази седмица</button>
+            <button id="nextWeekBtn">Следваща ›</button>
+          </div>
+        </div>
+
+        <div class="calendar-weekdays-grid" id="weekdaysGrid"></div>
+        <div class="calendar-weekend-grid" id="weekendGrid"></div>
+
+        <div class="reminders-section">
+          <h3>Да не забравя!</h3>
+          <div class="reminders-input-box">
+            <input type="text" id="reminderText" placeholder="Добави важна бележка или задача...">
+            <button id="addReminderBtn">Добави</button>
+          </div>
+          <div class="reminders-list" id="remindersList"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="notes">
+      <div class="section-head">
+        <h2>Бележки и линкове</h2>
+      </div>
+      <div class="notes-grid">
+        <div class="card notes-card">
+          <h3>Бързи бележки</h3>
+          <textarea id="notes-area" placeholder="Запиши нещо важно тук..."></textarea>
+        </div>
+        <div class="card notes-card">
+          <h3>Полезни линкове</h3>
+          <div class="links-list" id="linksList"></div>
+          <div class="add-link">
+            <input type="text" id="newLink" placeholder="https://...">
+            <button id="addLinkBtn">Добави</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="custom-modal-overlay" id="customModalOverlay">
+    <div class="custom-modal">
+      <h3>Потвърждение</h3>
+      <p id="customModalText">Потвърждавате ли изтриването?</p>
+      <div class="custom-modal-btns">
+        <button class="btn-cancel" id="modalCancelBtn">Отказ</button>
+        <button class="btn-confirm" id="modalConfirmBtn">Потвърди</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>Създадено с вдъхновение и <span class="heart">♥</span></footer>
+
+  <button class="scroll-top-btn" id="scrollTopBtn" title="Обратно в началото">↑</button>
+
+  <script>
+    // Данни за връзка със Supabase (безопасни за поставяне в клиентски код)
+    window.SUPABASE_URL = 'https://fuopkjhmpkupnuzvbriu.supabase.co';
+    window.SUPABASE_KEY = 'sb_publishable_9gcXRxv6T8Wd1R5SwCm0BQ_VX8T6ZBo';
+  </script>
+  <script src="script.js"></script>
+</body>
+
+</html>
