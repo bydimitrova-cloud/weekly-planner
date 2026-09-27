@@ -103,10 +103,10 @@
 
     const DAYS_BG = ['Понеделник', 'Вторник', 'Сряда', 'Четвъртък', 'Петък', 'Събота', 'Неделя'];
     const TIME_SLOTS = [];
-    for (let h = 8; h <= 18; h++) {
+    for (let h = 7; h <= 20; h++) {
       let hr = String(h).padStart(2, '0');
       TIME_SLOTS.push(`${hr}:00`);
-      if (h < 18) TIME_SLOTS.push(`${hr}:30`);
+      if (h < 20) TIME_SLOTS.push(`${hr}:30`);
     }
 
     function getMonday(d) {
@@ -363,14 +363,20 @@
 
     function renderDayTypeSelect(dateKey, dayType) {
       let opts = DAY_TYPE_OPTIONS.map(o => `<option value="${o.value}"${dayType === o.value ? ' selected' : ''}>${o.label}</option>`).join('');
-      return `<select class="day-type-select" onclick="event.stopPropagation()" onchange="setDayType('${dateKey}', this.value)">${opts}</select>`;
+      return `<select class="day-type-select" onclick="event.stopPropagation()" onchange="setDayType('${dateKey}', this.value, this)">${opts}</select>`;
     }
 
-    window.setDayType = function (dateKey, type) {
+    window.setDayType = function (dateKey, type, selectEl) {
       if (!appData.dayTypes) appData.dayTypes = {};
       appData.dayTypes[dateKey] = type;
       scheduleSave();
+      // Запазваме позицията на скрола, за да не "скача" страницата
+      // при повторното изчертаване на календара.
+      if (selectEl) selectEl.blur();
+      const scrollX = window.scrollX;
+      const scrollY = window.scrollY;
       renderCalendar();
+      window.scrollTo(scrollX, scrollY);
     }
 
     function renderWeekdayColumnHtml(dayDate, dayIndex) {

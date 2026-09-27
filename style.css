@@ -1492,10 +1492,20 @@
     footer {
       text-align: center;
       padding: 30px 20px 0;
-      color: var(--deep-heading);
+      text-shadow: 0 1px 4px rgba(255, 255, 255, 0.8);
+    }
+
+    footer .footer-line {
+      display: block;
+      /* Умишлено БЕЗ 'Poppins' тук: Poppins няма кирилски букви, затова
+         кирилицата пада на резервния шрифт, докато цифри/© се изписват
+         с истинския Poppins — смесица от два шрифта в един ред.
+         Затова карame целия футър да ползва директно резервния шрифт. */
+      font-family: Arial, Helvetica, sans-serif;
       font-size: 13.5px;
       font-weight: 600;
-      text-shadow: 0 1px 4px rgba(255, 255, 255, 0.8);
+      line-height: 1.4;
+      color: var(--deep-heading);
     }
 
     footer .heart {
@@ -1505,6 +1515,10 @@
       vertical-align: middle;
       display: inline-block;
       line-height: 1;
+    }
+
+    footer .footer-copyright {
+      margin-top: 6px;
     }
 
     .scroll-top-btn {
@@ -1615,12 +1629,6 @@
 
       .clock-time {
         font-size: 15px;
-      }
-
-      .player-card-inline {
-        flex-wrap: wrap;
-        justify-content: center;
-        text-align: center;
       }
 
       /* --- Wrap / контейнер --- */
