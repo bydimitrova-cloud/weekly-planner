@@ -1543,3 +1543,291 @@
       background: rgba(100, 100, 110, 0.4);
       transform: translateY(-2px);
     }
+
+    /* ======================================================
+       МОБИЛЕН RESPONSIVE ДИЗАЙН
+       ====================================================== */
+
+    @media (max-width: 768px) {
+
+      /* --- Начален (pre-auth) екран --- */
+      .auth-corner-btn {
+        top: 12px;
+        right: 12px;
+        padding: 9px 16px;
+        font-size: 12px;
+      }
+
+      .theme-btn-corner {
+        bottom: 12px;
+        right: 12px;
+        padding: 7px 14px;
+        font-size: 12px;
+      }
+
+      .auth-box {
+        padding: 24px 18px;
+        max-width: 100%;
+      }
+
+      .auth-box h2 {
+        font-size: 20px;
+      }
+
+      /* --- Приложение: горни бутони (тема / изход) --- */
+      .theme-switcher-container {
+        top: 10px;
+        right: 10px;
+        gap: 6px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        max-width: calc(100% - 20px);
+      }
+
+      .theme-btn {
+        padding: 7px 12px;
+        font-size: 11.5px;
+      }
+
+      /* --- Header --- */
+      header.hero {
+        padding: 90px 12px 12px;
+      }
+
+      h1.title {
+        font-size: 26px;
+        margin-bottom: 24px;
+      }
+
+      .top-row-container {
+        gap: 12px;
+      }
+
+      .daily-quote-box,
+      .live-clock-box,
+      .player-card-inline {
+        padding: 16px 16px;
+      }
+
+      .daily-quote-box p {
+        font-size: 14.5px;
+      }
+
+      .clock-time {
+        font-size: 15px;
+      }
+
+      .player-card-inline {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+      }
+
+      /* --- Wrap / контейнер --- */
+      .wrap {
+        padding: 12px 8px 60px;
+      }
+
+      .card {
+        padding: 14px;
+        border-radius: 16px;
+      }
+
+      /* --- Лента с месеци: хоризонтално превъртане вместо смачкан grid --- */
+      .months-quick-bar {
+        display: flex;
+        overflow-x: auto;
+        gap: 6px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+      }
+
+      .month-pill {
+        flex: 0 0 auto;
+        min-width: 78px;
+        padding: 8px 10px;
+      }
+
+      /* --- Планер: горна лента с навигация --- */
+      .planner-top-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+
+      .planner-title-range {
+        justify-content: center;
+        text-align: center;
+        font-size: 14px;
+      }
+
+      .date-highlight {
+        font-size: 16px;
+      }
+
+      .week-nav-btns {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .week-nav-btns button {
+        flex: 1;
+        min-width: 90px;
+      }
+
+      /* --- Календар: единична колона на мобилно --- */
+      .calendar-weekdays-grid,
+      .calendar-weekend-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .day-column {
+        padding: 12px;
+      }
+
+      /* --- Секции --- */
+      .section-head {
+        margin-top: 28px;
+        margin-bottom: 24px;
+      }
+
+      .section-head h2 {
+        font-size: 24px;
+      }
+
+      /* --- Бележки / линкове / тефтерче: единична колона --- */
+      .notes-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .notes-card {
+        height: auto;
+        max-height: none;
+      }
+
+      #notes-area {
+        min-height: 140px;
+      }
+
+      .links-list {
+        max-height: 220px;
+      }
+
+      .add-link {
+        flex-direction: column;
+      }
+
+      .add-link button {
+        width: 100%;
+        padding: 9px;
+      }
+
+      /* --- Тефтерче на мобилно --- */
+      .notebook-toolbar {
+        flex-direction: column;
+      }
+
+      .notebook-toolbar input,
+      .notebook-toolbar button {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .notebook-open-view .notebook-list {
+        max-height: 280px;
+      }
+
+      .notebook-item-btns {
+        flex-direction: column;
+      }
+
+      .notebook-item-btns button {
+        width: 100%;
+      }
+
+      /* --- Напомняния --- */
+      .reminders-input-box {
+        flex-direction: column;
+      }
+
+      .reminders-input-box button {
+        width: 100%;
+        padding: 9px;
+      }
+
+      /* --- Модал за потвърждение --- */
+      .custom-modal {
+        padding: 22px 20px;
+        width: 92%;
+      }
+
+      .custom-modal-btns {
+        flex-direction: column;
+      }
+
+      .custom-modal-btns button {
+        width: 100%;
+      }
+
+      /* --- Бутон "нагоре" по-навътре, за да не пречи на палеца --- */
+      .scroll-top-btn {
+        bottom: 16px;
+        right: 16px;
+        width: 42px;
+        height: 42px;
+        font-size: 18px;
+      }
+
+      footer {
+        padding: 20px 14px 0;
+        font-size: 12px;
+      }
+    }
+
+    /* Допълнителна прецизност за много малки екрани (телефони до ~380px) */
+    @media (max-width: 480px) {
+
+      .auth-corner-btn {
+        padding: 8px 14px;
+        font-size: 11px;
+      }
+
+      h1.title {
+        font-size: 22px;
+      }
+
+      .top-row-container {
+        grid-template-columns: 1fr;
+      }
+
+      .live-clock-box,
+      .player-card-inline {
+        flex-direction: row;
+      }
+
+      .month-pill {
+        min-width: 70px;
+        font-size: 11px;
+      }
+
+      .week-nav-btns {
+        flex-direction: column;
+      }
+
+      .week-nav-btns button {
+        width: 100%;
+      }
+
+      .day-quick-add select,
+      .day-quick-add input {
+        font-size: 12px;
+      }
+
+      .notebook-cover-icon {
+        font-size: 32px;
+      }
+
+      .notebook-cover-title {
+        font-size: 15px;
+      }
+    }
