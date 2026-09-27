@@ -86,7 +86,7 @@
       </div>
 
       <div class="live-clock-box">
-        <span class="clock-icon">🗓</span>
+        <span class="clock-icon">📅</span>
         <div class="clock-info">
           <div class="clock-date" id="liveDate">--</div>
           <div class="clock-time" id="liveTime">--:--:--</div>
@@ -94,7 +94,7 @@
       </div>
 
       <div class="player-card-inline">
-        <div class="player-art">🎜</div>
+        <div class="player-art">♫</div>
         <div class="player-info">
           <div class="eyebrow-small">Любимото радио</div>
           <h3>Zucca Radio</h3>
@@ -170,6 +170,37 @@
           <div class="add-link">
             <input type="text" id="newLink" placeholder="https://...">
             <button id="addLinkBtn">Добави</button>
+          </div>
+        </div>
+
+        <div class="card notes-card notebook-card">
+          <!-- Затворена корица на тефтерчето -->
+          <div class="notebook-cover" id="notebookCover">
+            <div class="notebook-cover-icon">📝</div>
+            <h3 class="notebook-cover-title">Моето тефтерче</h3>
+            <p class="notebook-cover-sub">Рецепти, пароли, лична информация...</p>
+            <button id="notebookOpenBtn">Отвори</button>
+          </div>
+
+          <!-- Отворено тефтерче -->
+          <div class="notebook-open-view hidden" id="notebookOpenView">
+            <div class="notebook-open-head">
+              <h3>Моето тефтерче</h3>
+              <button class="notebook-close-btn" id="notebookCloseBtn" title="Затвори">✕</button>
+            </div>
+            <div class="notebook-toolbar">
+              <input type="text" id="notebookSearch" placeholder="🔍︎ Търси по ключова дума...">
+              <button id="notebookAddBtn">+ Нов запис</button>
+            </div>
+            <div class="notebook-add-form hidden" id="notebookAddForm">
+              <input type="text" id="notebookTitleInput" placeholder="Заглавие / ключова дума (напр. Рецепта, Парола за..., Лекар)">
+              <textarea id="notebookContentInput" placeholder="Съдържание..."></textarea>
+              <div class="notebook-item-btns">
+                <button id="notebookSaveBtn">✔ Запази</button>
+                <button id="notebookCancelBtn" class="btn-cancel-inline">Отказ</button>
+              </div>
+            </div>
+            <div class="notebook-list" id="notebookList"></div>
           </div>
         </div>
       </div>

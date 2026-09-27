@@ -128,7 +128,7 @@
     // ==== Supabase: облачно съхранение (вход по имейл + парола) ====
     const sb = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_KEY);
     let currentUser = null;
-    let appData = { tasks: {}, reminders: [], links: [], notes: '' };
+    let appData = { tasks: {}, reminders: [], links: [], notes: '', notebook: [], dayTypes: {} };
     let saveTimer = null;
 
     function scheduleSave() {
@@ -150,7 +150,7 @@
       const { data, error } = await sb.from('planner_data').select('data').maybeSingle();
       if (error) { console.error('Грешка при зареждане:', error); }
       if (data && data.data) {
-        appData = Object.assign({ tasks: {}, reminders: [], links: [], notes: '' }, data.data);
+        appData = Object.assign({ tasks: {}, reminders: [], links: [], notes: '', notebook: [], dayTypes: {} }, data.data);
       } else {
         await sb.from('planner_data').insert({ user_id: currentUser.id, data: appData });
       }
@@ -165,6 +165,7 @@
       renderCalendar();
       renderReminders();
       renderLinks();
+      renderNotebook();
     }
 
     const authOverlay = document.getElementById('authOverlay');
@@ -353,10 +354,30 @@
       });
     }
 
+    // Тип на деня (работен / неработен). Делничните дни са работни по подразбиране,
+    // а съботата и неделята са неработни по подразбиране — освен ако потребителят не ги смени.
+    const DAY_TYPE_OPTIONS = [
+      { value: 'work', label: 'Работен ден' },
+      { value: 'off', label: 'Неработен ден' }
+    ];
+
+    function renderDayTypeSelect(dateKey, dayType) {
+      let opts = DAY_TYPE_OPTIONS.map(o => `<option value="${o.value}"${dayType === o.value ? ' selected' : ''}>${o.label}</option>`).join('');
+      return `<select class="day-type-select" onclick="event.stopPropagation()" onchange="setDayType('${dateKey}', this.value)">${opts}</select>`;
+    }
+
+    window.setDayType = function (dateKey, type) {
+      if (!appData.dayTypes) appData.dayTypes = {};
+      appData.dayTypes[dateKey] = type;
+      scheduleSave();
+      renderCalendar();
+    }
+
     function renderWeekdayColumnHtml(dayDate, dayIndex) {
       let dateKey = formatDateIso(dayDate);
       let dayTasks = appData.tasks[dateKey] || {};
-      let html = `<div class="day-column"><div class="day-header"><div class="day-name">${DAYS_BG[dayIndex]}</div><div class="day-date">${formatDateDisplay(dayDate)}</div></div><div class="time-slots-list">`;
+      let dayType = (appData.dayTypes && appData.dayTypes[dateKey]) || 'work';
+      let html = `<div class="day-column${dayType === 'off' ? ' day-type-off' : ''}"><div class="day-header"><div class="day-name">${DAYS_BG[dayIndex]}</div><div class="day-date">${formatDateDisplay(dayDate)}</div>${renderDayTypeSelect(dateKey, dayType)}</div><div class="time-slots-list">`;
 
       TIME_SLOTS.forEach(time => {
         let slotTasks = dayTasks[time] || [];
@@ -376,7 +397,8 @@
       let dateKey = formatDateIso(dayDate);
       let dayTasks = appData.tasks[dateKey] || {};
       let freeTasks = dayTasks['free'] || [];
-      let html = `<div class="day-column"><div class="day-header"><div class="day-name">${DAYS_BG[dayIndex]}</div><div class="day-date">${formatDateDisplay(dayDate)}</div></div><div class="free-notes-box">`;
+      let dayType = (appData.dayTypes && appData.dayTypes[dateKey]) || 'off';
+      let html = `<div class="day-column${dayType === 'off' ? ' day-type-off' : ''}"><div class="day-header"><div class="day-name">${DAYS_BG[dayIndex]}</div><div class="day-date">${formatDateDisplay(dayDate)}</div>${renderDayTypeSelect(dateKey, dayType)}</div><div class="free-notes-box">`;
 
       if (freeTasks.length === 0) {
         html += `<div style="font-size:11.5px; color:var(--ink-soft); font-style:italic; padding:4px;">Няма бележки.</div>`;
@@ -641,6 +663,166 @@
         renderLinks();
       });
     }
+
+    // === Тефтерче (лични разнородни записи с търсене по ключова дума) ===
+    function genNotebookId() {
+      return 'n_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+    }
+
+    let notebookOpenIds = new Set();
+    let notebookEditingId = null;
+
+    function notebookMatches(entry, q) {
+      if (!q) return true;
+      q = q.toLowerCase();
+      return (entry.title || '').toLowerCase().includes(q) || (entry.content || '').toLowerCase().includes(q);
+    }
+
+    function renderNotebook() {
+      const list = document.getElementById('notebookList');
+      const q = document.getElementById('notebookSearch').value.trim();
+      list.innerHTML = '';
+
+      if (!appData.notebook) appData.notebook = [];
+
+      if (appData.notebook.length === 0) {
+        list.innerHTML = '<div class="notebook-empty">Няма записи. Добави първия си запис с бутона по-горе — рецепта, парола, данни за лекар или каквото ти хрумне.</div>';
+        return;
+      }
+
+      const filtered = appData.notebook.filter(e => notebookMatches(e, q));
+      if (filtered.length === 0) {
+        list.innerHTML = '<div class="notebook-empty">Няма резултати за тази търсене.</div>';
+        return;
+      }
+
+      filtered.forEach(entry => {
+        const isEditing = notebookEditingId === entry.id;
+
+        if (isEditing) {
+          list.innerHTML += `
+            <div class="notebook-item open editing" id="nb-${entry.id}">
+              <input type="text" class="notebook-edit-title" id="nbEditTitle-${entry.id}" value="${escapeHtml(entry.title || '')}" placeholder="Заглавие / ключова дума">
+              <textarea class="notebook-edit-content" id="nbEditContent-${entry.id}" placeholder="Съдържание...">${escapeHtml(entry.content || '')}</textarea>
+              <div class="notebook-item-btns">
+                <button onclick="saveNotebookEdit('${entry.id}')">✔ Запази</button>
+                <button class="btn-cancel-inline" onclick="cancelNotebookEdit()">Отказ</button>
+              </div>
+            </div>`;
+          return;
+        }
+
+        const isOpen = notebookOpenIds.has(entry.id);
+        let preview = (entry.content || '').split('\n')[0];
+        if (preview.length > 80) preview = preview.slice(0, 80) + '…';
+
+        list.innerHTML += `
+          <div class="notebook-item${isOpen ? ' open' : ''}" id="nb-${entry.id}">
+            <div class="notebook-item-head" onclick="toggleNotebookItem('${entry.id}')">
+              <span class="notebook-item-title">${escapeHtml(entry.title || '(без заглавие)')}</span>
+              <span class="notebook-item-caret">${isOpen ? '▲' : '▼'}</span>
+            </div>
+            ${!isOpen ? `<div class="notebook-item-preview">${escapeHtml(preview)}</div>` : ''}
+            ${isOpen ? `
+              <div class="notebook-item-body">${escapeHtml(entry.content || '')}</div>
+              <div class="notebook-item-btns">
+                <button onclick="startEditNotebook('${entry.id}')">✎ Редактирай</button>
+                <button onclick="deleteNotebookEntry('${entry.id}')">✕ Изтрий</button>
+              </div>` : ''}
+          </div>`;
+      });
+    }
+
+    window.toggleNotebookItem = function (id) {
+      if (notebookEditingId === id) return;
+      if (notebookOpenIds.has(id)) notebookOpenIds.delete(id);
+      else notebookOpenIds.add(id);
+      renderNotebook();
+    }
+
+    window.startEditNotebook = function (id) {
+      notebookEditingId = id;
+      renderNotebook();
+    }
+
+    window.cancelNotebookEdit = function () {
+      notebookEditingId = null;
+      renderNotebook();
+    }
+
+    window.saveNotebookEdit = function (id) {
+      const titleInp = document.getElementById(`nbEditTitle-${id}`);
+      const contentInp = document.getElementById(`nbEditContent-${id}`);
+      const entry = appData.notebook.find(e => e.id === id);
+      if (entry) {
+        entry.title = titleInp.value.trim();
+        entry.content = contentInp.value.trim();
+        scheduleSave();
+      }
+      notebookEditingId = null;
+      notebookOpenIds.add(id);
+      renderNotebook();
+    }
+
+    window.deleteNotebookEntry = function (id) {
+      showConfirm("Сигурни ли сте, че искате да изтриете този запис?", () => {
+        appData.notebook = appData.notebook.filter(e => e.id !== id);
+        notebookOpenIds.delete(id);
+        scheduleSave();
+        renderNotebook();
+      });
+    }
+
+    const notebookAddBtn = document.getElementById('notebookAddBtn');
+    const notebookAddForm = document.getElementById('notebookAddForm');
+    const notebookTitleInput = document.getElementById('notebookTitleInput');
+    const notebookContentInput = document.getElementById('notebookContentInput');
+
+    notebookAddBtn.addEventListener('click', () => {
+      notebookAddForm.classList.toggle('hidden');
+      if (!notebookAddForm.classList.contains('hidden')) notebookTitleInput.focus();
+    });
+
+    document.getElementById('notebookSaveBtn').addEventListener('click', () => {
+      const title = notebookTitleInput.value.trim();
+      const content = notebookContentInput.value.trim();
+      if (!title && !content) return;
+      if (!appData.notebook) appData.notebook = [];
+      appData.notebook.unshift({ id: genNotebookId(), title, content });
+      scheduleSave();
+      notebookTitleInput.value = '';
+      notebookContentInput.value = '';
+      notebookAddForm.classList.add('hidden');
+      renderNotebook();
+    });
+
+    document.getElementById('notebookCancelBtn').addEventListener('click', () => {
+      notebookTitleInput.value = '';
+      notebookContentInput.value = '';
+      notebookAddForm.classList.add('hidden');
+    });
+
+    document.getElementById('notebookSearch').addEventListener('input', renderNotebook);
+
+    // Отваряне / затваряне на тефтерчето (корица <-> съдържание)
+    const notebookCover = document.getElementById('notebookCover');
+    const notebookOpenView = document.getElementById('notebookOpenView');
+
+    document.getElementById('notebookOpenBtn').addEventListener('click', () => {
+      notebookCover.classList.add('hidden');
+      notebookOpenView.classList.remove('hidden');
+      renderNotebook();
+      document.getElementById('notebookSearch').focus();
+    });
+
+    document.getElementById('notebookCloseBtn').addEventListener('click', () => {
+      notebookOpenView.classList.add('hidden');
+      notebookCover.classList.remove('hidden');
+      notebookAddForm.classList.add('hidden');
+      notebookTitleInput.value = '';
+      notebookContentInput.value = '';
+      notebookEditingId = null;
+    });
 
     // Бутон "Обратно в началото"
     const scrollTopBtn = document.getElementById('scrollTopBtn');

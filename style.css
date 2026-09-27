@@ -759,6 +759,17 @@
       display: flex;
       flex-direction: column;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    /* Оцветяване на неработни дни — денят си остава напълно активен за писане */
+    .day-column.day-type-off {
+      background: #eeeeee;
+      border-color: #c9c9c9;
+    }
+
+    .day-column.day-type-off .day-name {
+      color: #6b6b6b;
     }
 
     .day-header {
@@ -778,6 +789,20 @@
     .day-date {
       font-size: 11px;
       color: var(--ink-soft);
+    }
+
+    .day-type-select {
+      width: 100%;
+      margin-top: 6px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 2px 4px;
+      font-family: inherit;
+      font-size: 10px;
+      background: var(--card-inner-bg);
+      color: var(--ink);
+      outline: none;
+      cursor: pointer;
     }
 
     .time-slots-list {
@@ -1004,15 +1029,35 @@
 
     .notes-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 18px;
-      max-width: 900px;
+      max-width: 1300px;
       margin: 0 auto;
+      align-items: start;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 1000px) {
+      .notes-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
       .notes-grid {
         grid-template-columns: 1fr;
+      }
+    }
+
+    .notes-card {
+      height: 340px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media (max-width: 640px) {
+      .notes-card {
+        height: auto;
+        max-height: 420px;
       }
     }
 
@@ -1021,11 +1066,13 @@
       font-size: 16px;
       color: var(--deep-heading);
       margin: 0 0 10px;
+      flex-shrink: 0;
     }
 
     #notes-area {
       width: 100%;
-      min-height: 120px;
+      flex: 1;
+      min-height: 0;
       border: 1px solid var(--border-color);
       border-radius: 10px;
       padding: 10px;
@@ -1033,8 +1080,9 @@
       font-size: 13px;
       background: var(--notes-bg);
       color: var(--ink);
-      resize: vertical;
+      resize: none;
       outline: none;
+      overflow-y: auto;
     }
 
     .links-list {
@@ -1042,6 +1090,10 @@
       flex-direction: column;
       gap: 6px;
       margin-bottom: 10px;
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      padding-right: 2px;
     }
 
     .link-item {
@@ -1073,6 +1125,7 @@
     .add-link {
       display: flex;
       gap: 6px;
+      flex-shrink: 0;
     }
 
     .add-link input {
@@ -1094,6 +1147,276 @@
       padding: 6px 12px;
       cursor: pointer;
       font-size: 12px;
+    }
+
+    /* === Тефтерче (лични записи с търсене) === */
+    .notebook-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Затворена корица */
+    .notebook-cover {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 4px;
+      flex: 1;
+      min-height: 0;
+      padding: 10px 6px;
+    }
+
+    .notebook-cover.hidden {
+      display: none;
+    }
+
+    .notebook-cover-icon {
+      font-size: 38px;
+      line-height: 1;
+      margin-bottom: 6px;
+      filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.15));
+    }
+
+    .notebook-cover-title {
+      margin: 0 0 2px;
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      color: var(--deep-heading);
+    }
+
+    .notebook-cover-sub {
+      margin: 0 0 12px;
+      font-size: 11.5px;
+      color: var(--ink-soft);
+    }
+
+    #notebookOpenBtn {
+      background: var(--primary-text);
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      padding: 9px 26px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      transition: transform 0.15s ease;
+    }
+
+    #notebookOpenBtn:hover {
+      transform: scale(1.05);
+    }
+
+    /* Отворено тефтерче */
+    .notebook-open-view {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .notebook-open-view.hidden {
+      display: none;
+    }
+
+    .notebook-open-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-shrink: 0;
+    }
+
+    .notebook-open-head h3 {
+      margin: 0;
+    }
+
+    .notebook-close-btn {
+      background: none;
+      border: none;
+      font-size: 15px;
+      color: var(--ink-soft);
+      cursor: pointer;
+      padding: 2px 6px;
+      line-height: 1;
+    }
+
+    .notebook-close-btn:hover {
+      color: #e63946;
+    }
+
+    .notebook-toolbar {
+      flex-shrink: 0;
+    }
+
+    .notebook-add-form {
+      flex-shrink: 0;
+    }
+
+    .notebook-open-view .notebook-list {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .notebook-toolbar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .notebook-toolbar input {
+      flex: 1;
+      min-width: 180px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 9px 14px;
+      font-family: inherit;
+      font-size: 13px;
+      background: var(--card-inner-bg);
+      color: var(--ink);
+      outline: none;
+    }
+
+    .notebook-toolbar button {
+      background: var(--primary-text);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 9px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .notebook-add-form {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: var(--secondary-box-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+
+    .notebook-add-form.hidden {
+      display: none;
+    }
+
+    .notebook-add-form input,
+    .notebook-add-form textarea,
+    .notebook-edit-title,
+    .notebook-edit-content {
+      width: 100%;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 9px 12px;
+      font-family: inherit;
+      font-size: 13px;
+      background: var(--card-inner-bg);
+      color: var(--ink);
+      outline: none;
+    }
+
+    .notebook-add-form textarea,
+    .notebook-edit-content {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .notebook-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .notebook-empty {
+      font-size: 12.5px;
+      color: var(--ink-soft);
+      font-style: italic;
+      text-align: center;
+      padding: 16px 4px;
+    }
+
+    .notebook-item {
+      background: var(--card-inner-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 10px 14px;
+    }
+
+    .notebook-item-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .notebook-item-title {
+      font-weight: 600;
+      color: var(--deep-heading);
+      font-size: 13.5px;
+      word-break: break-word;
+    }
+
+    .notebook-item-caret {
+      color: var(--ink-soft);
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+
+    .notebook-item-preview {
+      font-size: 12px;
+      color: var(--ink-soft);
+      margin-top: 4px;
+      word-break: break-word;
+    }
+
+    .notebook-item-body {
+      font-size: 12.5px;
+      color: var(--ink);
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px dashed var(--border-color);
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .notebook-item-btns {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .notebook-item-btns button {
+      background: var(--primary-text);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .notebook-item-btns button.btn-cancel-inline,
+    #notebookCancelBtn {
+      background: #e9ecef;
+      color: #333;
+    }
+
+    .notebook-item.editing {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
     /* Модал за потвърждение */
