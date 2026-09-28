@@ -94,7 +94,7 @@
       position: fixed;
       bottom: 30px;
       left: 30px;
-      z-index: 5001; /* над екрана за вход (auth-overlay е 5000) */
+      z-index: 1500;
       max-width: 900px;
       /* Cinzel няма кирилица, затова ползваме Playfair Display */
       font-family: 'Playfair Display', Georgia, serif;
@@ -116,29 +116,20 @@
       display: none !important;
     }
 
-    /* Когато е отворен екранът за вход: по-малък текст, в цветовете на темата */
+    /* Скрива текста, когато е отворен екранът за вход (показва се само на най-началната страница) */
     body:has(#authOverlay:not(.hidden)) .corner-planning-quote {
-      font-size: 32px;
-      max-width: 520px;
-      color: var(--primary-text);
-      text-shadow: none;
+      display: none !important;
     }
 
-    /* Мобилни екрани: центриран, под формата за вход */
+    /* Мобилни екрани: по-малък текст, центриран, над бутона за тема */
     @media (max-width: 768px) {
       .corner-planning-quote {
         left: 16px;
         right: 16px;
-        bottom: 60px;
+        bottom: 64px;
         max-width: none;
         text-align: center;
-        font-size: 22px;
-      }
-
-      body:has(#authOverlay:not(.hidden)) .corner-planning-quote {
-        font-size: 16px;
-        bottom: 20px;
-        max-width: none;
+        font-size: clamp(20px, 6vw, 30px);
       }
     }
 
@@ -1670,8 +1661,9 @@
 
       .month-pill {
         min-width: 0;
-        padding: 8px 2px;
-        font-size: 12px;
+        padding: 8px 0;
+        font-size: clamp(9px, 3vw, 12px); /* побира се и на най-тесните екрани */
+        overflow: hidden;
       }
 
       /* --- Планер: горна лента с навигация --- */
@@ -1833,8 +1825,8 @@
 
       .month-pill {
         min-width: 0;
-        padding: 8px 1px;
-        font-size: 11px;
+        padding: 8px 0;
+        font-size: clamp(9px, 3vw, 12px);
       }
 
       .week-nav-btns {
