@@ -346,7 +346,11 @@
 
     function updateActiveMonthPill() {
       const pills = document.querySelectorAll('.month-pill');
-      let currentMonth = currentMonday.getMonth();
+      // Месецът се определя по четвъртъка от седмицата (ISO правило),
+      // а не по понеделника, който често е в предишния месец.
+      let thursday = new Date(currentMonday);
+      thursday.setDate(currentMonday.getDate() + 3);
+      let currentMonth = thursday.getMonth();
       pills.forEach(pill => {
         let m = parseInt(pill.getAttribute('data-month'));
         if (m === currentMonth) pill.classList.add('active');
@@ -561,7 +565,14 @@
     document.querySelectorAll('.month-pill').forEach(pill => {
       pill.addEventListener('click', () => {
         let m = parseInt(pill.getAttribute('data-month'));
-        currentMonday = getMonday(new Date(currentMonday.getFullYear(), m, 1));
+        // Използваме годината на четвъртъка от текущата седмица (важи за седмици около 1 януари)
+        let thu = new Date(currentMonday); thu.setDate(currentMonday.getDate() + 3);
+        let monday = getMonday(new Date(thu.getFullYear(), m, 1));
+        // Ако четвъртъкът на седмицата на 1-во число е в предишния месец,
+        // вземаме следващата седмица, за да се маркира кликнатият месец.
+        let check = new Date(monday); check.setDate(monday.getDate() + 3);
+        if (check.getMonth() !== m) monday.setDate(monday.getDate() + 7);
+        currentMonday = monday;
         renderCalendar();
       });
     });
