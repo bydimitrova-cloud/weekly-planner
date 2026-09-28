@@ -98,7 +98,7 @@
       max-width: 900px;
       /* Cinzel няма кирилица, затова ползваме Playfair Display */
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: 60px;
+      font-size: 55px;
       font-weight: 500;
       font-style: italic;
       color: #f1efef;
@@ -121,17 +121,19 @@
       display: none !important;
     }
 
-    /* Мобилни екрани: по-малък текст, центриран, над бутона за тема */
-    @media (max-width: 768px) {
-      .corner-planning-quote {
-        left: 16px;
-        right: 16px;
-        bottom: 64px;
-        max-width: none;
-        text-align: center;
-        font-size: clamp(20px, 6vw, 30px);
-      }
-    }
+    /* Мобилни екрани: по-малък текст, центриран хоризонтално и вертикално */
+@media (max-width: 768px) {
+  .corner-planning-quote {
+    left: 16px;
+    right: 16px;
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+    max-width: none;
+    text-align: center;
+    font-size: clamp(20px, 6vw, 30px);
+  }
+}
 
     /* Екран за вход / регистрация */
     .auth-overlay {
