@@ -3,10 +3,8 @@
       document.documentElement.setAttribute('data-theme', themeName);
       localStorage.setItem('bday_planner_theme', themeName);
       const btn = document.getElementById('themeSwitcherBtn');
-      if (themeName === 'sakura') {
-        btn.textContent = '🐬 Промени темата';
-      } else {
-        btn.textContent = '🌸 Промени темата';
+      if (btn) {
+        btn.textContent = themeName === 'sakura' ? '🐬 Промени темата' : '🌸 Промени темата';
       }
     }
 
@@ -156,6 +154,8 @@
       }
     }
 
+    const notesArea = document.getElementById('notes-area');
+
     function startApp() {
       document.body.classList.remove('pre-auth');
       document.getElementById('authOverlay').classList.add('hidden');
@@ -282,14 +282,12 @@
     const recoveryError = document.getElementById('recoveryError');
     const recoveryNote = document.getElementById('recoveryNote');
 
-    const RECOVERY_EYE_OPEN = EYE_OPEN_SVG;
-    const RECOVERY_EYE_CLOSED = EYE_CLOSED_SVG;
     const recoveryEyeBtn = document.getElementById('recoveryEyeBtn');
-    recoveryEyeBtn.innerHTML = RECOVERY_EYE_CLOSED;
+    recoveryEyeBtn.innerHTML = EYE_CLOSED_SVG;
     recoveryEyeBtn.addEventListener('click', () => {
       const isHidden = recoveryPassword.type === 'password';
       recoveryPassword.type = isHidden ? 'text' : 'password';
-      recoveryEyeBtn.innerHTML = isHidden ? RECOVERY_EYE_OPEN : RECOVERY_EYE_CLOSED;
+      recoveryEyeBtn.innerHTML = isHidden ? EYE_OPEN_SVG : EYE_CLOSED_SVG;
       recoveryEyeBtn.classList.toggle('active', isHidden);
     });
 
@@ -697,7 +695,6 @@
     });
 
     // Бележки и линкове
-    const notesArea = document.getElementById('notes-area');
     notesArea.addEventListener('input', () => {
       appData.notes = notesArea.value;
       scheduleSave();
@@ -908,4 +905,3 @@
     scrollTopBtn.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-    

@@ -134,7 +134,7 @@ body:has(#authOverlay:not(.hidden)) .corner-planning-quote {
     /* хоризонтално */
     padding: 0 16px;
     text-align: center;
-    font-size: clamp(20px, 6vw, 30px);
+    font-size: clamp(22px, 7vw, 40px);
   }
 }
 
@@ -370,13 +370,15 @@ body.pre-auth .scroll-top-btn {
   display: none;
 }
 
+/* Бутоните тема/изход: absolute, за да скролват със страницата (не са fixed) */
 .theme-switcher-container {
-  position: fixed;
+  position: absolute;
   top: 20px;
   right: 20px;
   z-index: 1000;
   display: flex;
   gap: 8px;
+  transform: none;
 }
 
 .theme-btn {
@@ -1859,26 +1861,13 @@ footer .footer-copyright {
 }
 
 /* ======================================================
-       ГОДИНИ над месеците (над първите 4 месеца)
+       ГОДИНИ (4 бутона – винаги в 1 ред)
        ====================================================== */
 .years-quick-bar {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  /* същата мрежа като при месеците */
+  grid-template-columns: repeat(4, 1fr);
   gap: 6px;
   margin-bottom: 6px;
-}
-
-@media (max-width: 1024px) {
-  .years-quick-bar {
-    grid-template-columns: repeat(6, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .years-quick-bar {
-    grid-template-columns: repeat(4, 1fr);
-  }
 }
 
 .year-pill {
@@ -1904,13 +1893,6 @@ footer .footer-copyright {
   color: #fff;
   border-color: var(--primary-text);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-}
-
-/* Бутоните "Промени темата" и "Изход": закрепени в горния десен ъгъл на страницата
-       и НЕ ги следват при скрол (излизат заедно със страницата, не пречат на съдържанието) */
-.theme-switcher-container {
-  position: absolute;
-  transform: none;
 }
 
 /* Бутоните преди вход (долу/горе в ъгъла) – фиксирани */
@@ -2053,6 +2035,32 @@ h1.title:hover {
     transform: none;
   }
 }
+
+/* Мобилно: без hover / микроанимации (заглавие + карти) */
+@media (max-width: 768px) {
+  h1.title {
+    transition: none;
+  }
+  h1.title:hover {
+    transform: none;
+  }
+
+  .daily-quote-box,
+  .live-clock-box,
+  .player-card-inline,
+  .notes-card {
+    transition: none;
+  }
+  .daily-quote-box:hover,
+  .live-clock-box:hover,
+  .player-card-inline:hover,
+  .notes-card:hover {
+    transform: none;
+    border-color: inherit;
+    box-shadow: var(--shadow);
+  }
+}
+
 /* Премахва контура при фокус на бутона "Промени темата" */
 .theme-btn:focus,
 .theme-btn:focus-visible {
