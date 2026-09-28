@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Личен седмичен планер</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -114,6 +116,13 @@
   <div class="wrap">
     <section id="planner">
       <div class="card">
+        <!-- Бърз избор на година (над първите 4 месеца) -->
+        <div class="years-quick-bar" id="yearsBar">
+          <div class="year-pill" data-year="2026">2026</div>
+          <div class="year-pill" data-year="2027">2027</div>
+          <div class="year-pill" data-year="2028">2028</div>
+          <div class="year-pill" data-year="2029">2029</div>
+        </div>
         <div class="months-quick-bar" id="monthsBar">
           <div class="month-pill" data-month="0">Януари</div>
           <div class="month-pill" data-month="1">Февруари</div>
@@ -136,7 +145,7 @@
           </div>
           <div class="week-nav-btns">
             <button id="prevWeekBtn">‹ Предишна</button>
-            <button id="currentWeekBtn">Тази седмица</button>
+            <button id="currentWeekBtn">Текуща седмица</button>
             <button id="nextWeekBtn">Следваща ›</button>
           </div>
         </div>

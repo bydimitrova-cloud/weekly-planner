@@ -1,4 +1,4 @@
-    // Тема превключване
+// Тема превключване
     function setTheme(themeName) {
       document.documentElement.setAttribute('data-theme', themeName);
       localStorage.setItem('bday_planner_theme', themeName);
@@ -356,6 +356,10 @@
         if (m === currentMonth) pill.classList.add('active');
         else pill.classList.remove('active');
       });
+      let currentYear = thursday.getFullYear();
+      document.querySelectorAll('.year-pill').forEach(pill => {
+        pill.classList.toggle('active', parseInt(pill.getAttribute('data-year')) === currentYear);
+      });
     }
 
     // Тип на деня (работен / неработен). Делничните дни са работни по подразбиране,
@@ -383,11 +387,50 @@
       window.scrollTo(scrollX, scrollY);
     }
 
+    // ---------- Акордеон за дните Пон–Пет (само мобилна версия) ----------
+    const ACCORDION_MQ = window.matchMedia('(max-width: 768px)');
+    let accordionWeekKey = null;   // за коя седмица е зададено състоянието
+    let openDayKey = null;         // dateKey на разгънатия ден (null = всички затворени)
+
+    function resetAccordionForWeek(days) {
+      let weekKey = formatDateIso(days[0]);
+      if (accordionWeekKey === weekKey) return;
+      accordionWeekKey = weekKey;
+      // По подразбиране всички дни са затворени
+      openDayKey = null;
+    }
+
+    // Затваря всички дни (при връщане към мобилна версия от по-широк екран)
+    function collapseAllDays() {
+      openDayKey = null;
+      document.querySelectorAll('.day-column.accordion-day').forEach(col => {
+        col.classList.remove('open');
+        let hdr = col.querySelector('.day-header');
+        if (hdr) hdr.setAttribute('aria-expanded', 'false');
+      });
+    }
+    ACCORDION_MQ.addEventListener('change', collapseAllDays);
+
+    window.toggleDayAccordion = function (dateKey) {
+      if (!ACCORDION_MQ.matches) return; // на десктоп няма акордеон
+      openDayKey = (openDayKey === dateKey) ? null : dateKey;
+      let opened = null;
+      document.querySelectorAll('.day-column.accordion-day').forEach(col => {
+        let isOpen = col.dataset.date === openDayKey;
+        col.classList.toggle('open', isOpen);
+        let hdr = col.querySelector('.day-header');
+        if (hdr) hdr.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        if (isOpen) opened = col;
+      });
+      if (opened) opened.scrollIntoView({ block: 'start', behavior: 'smooth' }); // заглавието на дена най-горе
+    }
+
     function renderWeekdayColumnHtml(dayDate, dayIndex) {
       let dateKey = formatDateIso(dayDate);
       let dayTasks = appData.tasks[dateKey] || {};
       let dayType = (appData.dayTypes && appData.dayTypes[dateKey]) || 'work';
-      let html = `<div class="day-column${dayType === 'off' ? ' day-type-off' : ''}"><div class="day-header"><div class="day-name">${DAYS_BG[dayIndex]}</div><div class="day-date">${formatDateDisplay(dayDate)}</div>${renderDayTypeSelect(dateKey, dayType)}</div><div class="time-slots-list">`;
+      let isOpen = (dateKey === openDayKey);
+      let html = `<div class="day-column accordion-day${isOpen ? ' open' : ''}${dayType === 'off' ? ' day-type-off' : ''}" data-date="${dateKey}"><div class="day-header" role="button" aria-expanded="${isOpen}" onclick="toggleDayAccordion('${dateKey}')"><div class="day-name">${DAYS_BG[dayIndex]}</div><div class="day-date">${formatDateDisplay(dayDate)}</div>${renderDayTypeSelect(dateKey, dayType)}</div><div class="time-slots-list">`;
 
       TIME_SLOTS.forEach(time => {
         let slotTasks = dayTasks[time] || [];
@@ -430,6 +473,7 @@
       weekendContainer.innerHTML = '';
 
       let days = getDaysOfWeek(currentMonday);
+      resetAccordionForWeek(days);
       updateDateDisplay(currentMonday, days[6]);
       updateActiveMonthPill();
 
@@ -562,18 +606,32 @@
     document.getElementById('nextWeekBtn').addEventListener('click', () => { currentMonday.setDate(currentMonday.getDate() + 7); renderCalendar(); });
     document.getElementById('currentWeekBtn').addEventListener('click', () => { currentMonday = getMonday(new Date()); renderCalendar(); });
 
+    // Отива към даден месец в дадена година (маркира се кликнатият месец)
+    function goToMonth(year, m) {
+      let monday = getMonday(new Date(year, m, 1));
+      // Ако четвъртъкът на седмицата на 1-во число е в предишния месец,
+      // вземаме следващата седмица, за да се маркира кликнатият месец.
+      let check = new Date(monday); check.setDate(monday.getDate() + 3);
+      if (check.getMonth() !== m) monday.setDate(monday.getDate() + 7);
+      currentMonday = monday;
+      renderCalendar();
+    }
+
     document.querySelectorAll('.month-pill').forEach(pill => {
       pill.addEventListener('click', () => {
         let m = parseInt(pill.getAttribute('data-month'));
         // Използваме годината на четвъртъка от текущата седмица (важи за седмици около 1 януари)
         let thu = new Date(currentMonday); thu.setDate(currentMonday.getDate() + 3);
-        let monday = getMonday(new Date(thu.getFullYear(), m, 1));
-        // Ако четвъртъкът на седмицата на 1-во число е в предишния месец,
-        // вземаме следващата седмица, за да се маркира кликнатият месец.
-        let check = new Date(monday); check.setDate(monday.getDate() + 3);
-        if (check.getMonth() !== m) monday.setDate(monday.getDate() + 7);
-        currentMonday = monday;
-        renderCalendar();
+        goToMonth(thu.getFullYear(), m);
+      });
+    });
+
+    // Бърз избор на година: запазва текущия месец, сменя само годината
+    document.querySelectorAll('.year-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        let y = parseInt(pill.getAttribute('data-year'));
+        let thu = new Date(currentMonday); thu.setDate(currentMonday.getDate() + 3);
+        goToMonth(y, thu.getMonth());
       });
     });
 
@@ -850,3 +908,4 @@
     scrollTopBtn.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+    
