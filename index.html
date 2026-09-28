@@ -30,7 +30,8 @@
   <button class="auth-corner-btn" id="authGoToFormBtn">Вход за потребители</button>
 
   <!-- Бутон за смяна на темата (долу вдясно), докато потребителят не е логнат[cite: 2] -->
-  <button class="theme-btn theme-btn-corner" id="themeSwitcherBtnPreauth" onclick="toggleTheme()">Промени темата</button>
+  <button class="theme-btn theme-btn-corner" id="themeSwitcherBtnPreauth" onclick="toggleTheme()">Промени
+    темата</button>
 
   <!-- Екран за вход / регистрация -->
   <div class="auth-overlay hidden" id="authOverlay">
@@ -42,7 +43,8 @@
       <input type="email" id="authEmail" placeholder="Имейл" autocomplete="email">
       <div class="password-field-wrap">
         <input type="password" id="authPassword" placeholder="Парола (мин. 6 символа)" autocomplete="current-password">
-        <button type="button" class="password-eye-btn" id="passwordEyeBtn" title="Покажи/скрий паролата" aria-label="Покажи/скрий паролата"></button>
+        <button type="button" class="password-eye-btn" id="passwordEyeBtn" title="Покажи/скрий паролата"
+          aria-label="Покажи/скрий паролата"></button>
       </div>
       <div class="forgot-password-row">
         <a href="#" id="forgotPasswordLink">Забравена парола?</a>
@@ -59,8 +61,10 @@
       <h2>Нова парола</h2>
       <p class="auth-subtitle">Въведи новата си парола, за да завършиш възстановяването на достъпа.</p>
       <div class="password-field-wrap">
-        <input type="password" id="recoveryPassword" placeholder="Нова парола (мин. 6 символа)" autocomplete="new-password">
-        <button type="button" class="password-eye-btn" id="recoveryEyeBtn" title="Покажи/скрий паролата" aria-label="Покажи/скрий паролата"></button>
+        <input type="password" id="recoveryPassword" placeholder="Нова парола (мин. 6 символа)"
+          autocomplete="new-password">
+        <button type="button" class="password-eye-btn" id="recoveryEyeBtn" title="Покажи/скрий паролата"
+          aria-label="Покажи/скрий паролата"></button>
       </div>
       <div class="auth-error" id="recoveryError"></div>
       <div class="auth-note" id="recoveryNote"></div>
@@ -105,8 +109,7 @@
           <button class="radio-btn" id="radioPlayBtn" title="Включи / Изключи">▶</button>
           <span class="radio-status" id="radioStatus">Спряно</span>
         </div>
-        <iframe class="hidden-radio-frame" id="radioIframe" src="about:blank"
-          allow="autoplay"></iframe>
+        <iframe class="hidden-radio-frame" id="radioIframe" src="about:blank" allow="autoplay"></iframe>
       </div>
     </div>
 
@@ -160,6 +163,9 @@
             <button id="addReminderBtn">Добави</button>
           </div>
           <div class="reminders-list" id="remindersList"></div>
+          <div class="print-btn-row">
+            <button id="printWeekBtn" title="Разпечатай тази седмица">🖨 Печат</button>
+          </div>
         </div>
       </div>
     </section>
@@ -202,7 +208,8 @@
               <button id="notebookAddBtn">+ Нов запис</button>
             </div>
             <div class="notebook-add-form hidden" id="notebookAddForm">
-              <input type="text" id="notebookTitleInput" placeholder="Заглавие / ключова дума (напр. Рецепта, Парола за..., Лекар)">
+              <input type="text" id="notebookTitleInput"
+                placeholder="Заглавие / ключова дума (напр. Рецепта, Парола за..., Лекар)">
               <textarea id="notebookContentInput" placeholder="Съдържание..."></textarea>
               <div class="notebook-item-btns">
                 <button id="notebookSaveBtn">✔ Запази</button>
@@ -227,7 +234,8 @@
     </div>
   </div>
 
-  <footer><span class="footer-line">Създадено с вдъхновение и <span class="heart">♥</span></span><span class="footer-line footer-copyright">© 2026 Боряна Димитрова</span></footer>
+  <footer><span class="footer-line">Създадено с вдъхновение и <span class="heart">♥</span></span><span
+      class="footer-line footer-copyright">© 2026 Боряна Димитрова</span></footer>
 
   <button class="scroll-top-btn" id="scrollTopBtn" title="Обратно в началото">↑</button>
 

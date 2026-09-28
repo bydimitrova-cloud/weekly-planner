@@ -1,2019 +1,2202 @@
 /* === ТЕМИ (SAKURA & SEA) === */
-    :root[data-theme="sakura"] {
-      --em-title-color: #e77f97;
-      --bg-image-url: url("https://wallpapershome.com/images/pages/pic_h/25872.jpg");
-      --bg-overlay-opacity: 0.18;
+:root[data-theme="sakura"] {
+  --em-title-color: #e77f97;
+  --bg-image-url: url("https://wallpapershome.com/images/pages/pic_h/25872.jpg");
+  --bg-overlay-opacity: 0.18;
 
-      --primary-base: #f7dbe0;
-      --primary-deep: #eab8c4;
-      --primary-text: #8a4a5c;
-      --accent-color: #f4c6d4;
-      --card-bg: #fffaf5;
-      --card-inner-bg: #ffffff;
-      --border-color: #ebdcd0;
-      --deep-heading: #6b3b4a;
-      --main-title-color: #700829;
+  --primary-base: #f7dbe0;
+  --primary-deep: #eab8c4;
+  --primary-text: #8a4a5c;
+  --accent-color: #f4c6d4;
+  --card-bg: #fffaf5;
+  --card-inner-bg: #ffffff;
+  --border-color: #ebdcd0;
+  --deep-heading: #6b3b4a;
+  --main-title-color: #700829;
 
-      --ink: #5c4a4f;
-      --ink-soft: #9c8890;
-      --gold: #cfa15f;
-      --secondary-box-bg: #fff8f2;
-      --notes-bg: #f3e9dd;
+  --ink: #5c4a4f;
+  --ink-soft: #9c8890;
+  --gold: #cfa15f;
+  --secondary-box-bg: #fff8f2;
+  --notes-bg: #f3e9dd;
 
-      --radius-lg: 22px;
-      --radius-md: 14px;
-      --shadow: 0 10px 30px rgba(140, 90, 100, 0.10);
-    }
+  --radius-lg: 22px;
+  --radius-md: 14px;
+  --shadow: 0 10px 30px rgba(140, 90, 100, 0.10);
+}
 
-    :root[data-theme="sea"] {
-      --em-title-color: #0284c7;
-      --bg-image-url: url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=80");
-      --bg-overlay-opacity: 0.12;
+:root[data-theme="sea"] {
+  --em-title-color: #0284c7;
+  --bg-image-url: url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=80");
+  --bg-overlay-opacity: 0.12;
 
-      --primary-base: #e0f2fe;
-      --primary-deep: #7dd3fc;
-      --primary-text: #0284c7;
-      --accent-color: #38bdf8;
-      --card-bg: rgba(255, 255, 255, 0.94);
-      --card-inner-bg: #ffffff;
-      --border-color: #bae6fd;
-      --deep-heading: #0369a1;
-      --main-title-color: #0c4a6e;
+  --primary-base: #e0f2fe;
+  --primary-deep: #7dd3fc;
+  --primary-text: #0284c7;
+  --accent-color: #38bdf8;
+  --card-bg: rgba(255, 255, 255, 0.94);
+  --card-inner-bg: #ffffff;
+  --border-color: #bae6fd;
+  --deep-heading: #0369a1;
+  --main-title-color: #0c4a6e;
 
-      --ink: #0f172a;
-      --ink-soft: #64748b;
-      --gold: #0284c7;
-      --secondary-box-bg: #f0f7f4;
-      --notes-bg: #fdfcdc;
+  --ink: #0f172a;
+  --ink-soft: #64748b;
+  --gold: #0284c7;
+  --secondary-box-bg: #f0f7f4;
+  --notes-bg: #fdfcdc;
 
-      --radius-lg: 22px;
-      --radius-md: 14px;
-      --shadow: 0 10px 30px rgba(0, 119, 182, 0.15);
-    }
+  --radius-lg: 22px;
+  --radius-md: 14px;
+  --shadow: 0 10px 30px rgba(0, 119, 182, 0.15);
+}
 
-    * {
-      box-sizing: border-box;
-    }
+* {
+  box-sizing: border-box;
+}
 
-    html {
-      scroll-behavior: smooth;
-    }
+html {
+  scroll-behavior: smooth;
+}
 
-    body {
-      margin: 0;
-      position: relative;
-      font-family: 'Poppins', sans-serif;
-      color: var(--ink);
-      min-height: 100vh;
-      line-height: 1.5;
-      transition: background 0.3s ease, color 0.3s ease;
-    }
+body {
+  margin: 0;
+  position: relative;
+  font-family: 'Poppins', sans-serif;
+  color: var(--ink);
+  min-height: 100vh;
+  line-height: 1.5;
+  transition: background 0.3s ease, color 0.3s ease;
+}
 
-    /* Фонова снимка на цялата страница */
-    .page-bg {
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      background-image: var(--bg-image-url);
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      transition: background-image 0.4s ease;
-    }
+/* Фонова снимка на цялата страница */
+.page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image: var(--bg-image-url);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  transition: background-image 0.4s ease;
+}
 
-    .page-bg::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(160deg, rgba(255, 255, 255, var(--bg-overlay-opacity)) 0%, rgba(240, 240, 240, var(--bg-overlay-opacity)) 100%);
-    }
+.page-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(255, 255, 255, var(--bg-overlay-opacity)) 0%, rgba(240, 240, 240, var(--bg-overlay-opacity)) 100%);
+}
 
-    /* Стил за текста в долния ляв ъгъл на началната страница */
-    .corner-planning-quote {
-      position: fixed;
-      bottom: 30px;
-      left: 30px;
-      z-index: 1500;
-      max-width: 700px;
-      /* Cinzel няма кирилица, затова ползваме Playfair Display */
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 65px;
-      font-weight: 500;
-      font-style: italic;
-      color: #f1efef;
-      line-height: 1.25;
-      text-shadow:
-        0 2px 5px rgba(0, 0, 0, 1),
-        0 0 15px rgba(0, 0, 0, 0.9),
-        0 0 30px rgba(0, 0, 0, 0.8),
-        2px 2px 0px rgba(0, 0, 0, 0.6);
-      pointer-events: none;
-    }
+/* Стил за текста в долния ляв ъгъл на началната страница */
+.corner-planning-quote {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  z-index: 1500;
+  max-width: 700px;
+  /* Cinzel няма кирилица, затова ползваме Playfair Display */
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 65px;
+  font-weight: 500;
+  font-style: italic;
+  color: #f1efef;
+  line-height: 1.25;
+  text-shadow:
+    0 2px 5px rgba(0, 0, 0, 1),
+    0 0 15px rgba(0, 0, 0, 0.9),
+    0 0 30px rgba(0, 0, 0, 0.8),
+    2px 2px 0px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
 
-    /* Скрива текста след като потребителят влезе в системата */
-    body:not(.pre-auth) .corner-planning-quote {
-      display: none !important;
-    }
+/* Скрива текста след като потребителят влезе в системата */
+body:not(.pre-auth) .corner-planning-quote {
+  display: none !important;
+}
 
-    /* Скрива текста, когато е отворен екранът за вход (показва се само на най-началната страница) */
-    body:has(#authOverlay:not(.hidden)) .corner-planning-quote {
-      display: none !important;
-    }
+/* Скрива текста, когато е отворен екранът за вход (показва се само на най-началната страница) */
+body:has(#authOverlay:not(.hidden)) .corner-planning-quote {
+  display: none !important;
+}
 
-    /* Мобилни екрани: текстът е центриран хоризонтално и вертикално */
-    @media (max-width: 768px) {
-      .corner-planning-quote {
-        inset: 0;                 /* top, right, bottom, left = 0 */
-        max-width: none;
-        display: flex;
-        align-items: center;      /* вертикално */
-        justify-content: center;  /* хоризонтално */
-        padding: 0 16px;
-        text-align: center;
-        font-size: clamp(20px, 6vw, 30px);
-      }
-    }
+/* Мобилни екрани: текстът е центриран хоризонтално и вертикално */
+@media (max-width: 768px) {
+  .corner-planning-quote {
+    inset: 0;
+    /* top, right, bottom, left = 0 */
+    max-width: none;
+    display: flex;
+    align-items: center;
+    /* вертикално */
+    justify-content: center;
+    /* хоризонтално */
+    padding: 0 16px;
+    text-align: center;
+    font-size: clamp(20px, 6vw, 30px);
+  }
+}
 
-    /* Екран за вход / регистрация */
-    .auth-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 5000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(160deg, var(--primary-base), var(--card-bg));
-      padding: 20px;
-    }
+/* Екран за вход / регистрация */
+.auth-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, var(--primary-base), var(--card-bg));
+  padding: 20px;
+}
 
-    .auth-overlay.hidden {
-      display: none;
-    }
+.auth-overlay.hidden {
+  display: none;
+}
 
-    .auth-box {
-      background: var(--card-inner-bg);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow);
-      padding: 32px 28px;
-      max-width: 360px;
-      width: 100%;
-      text-align: center;
-    }
+.auth-box {
+  background: var(--card-inner-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 32px 28px;
+  max-width: 360px;
+  width: 100%;
+  text-align: center;
+}
 
-    .auth-box h2 {
-      font-family: 'Playfair Display', serif;
-      color: var(--main-title-color);
-      margin: 0 0 8px;
-      font-size: 24px;
-    }
+.auth-box h2 {
+  font-family: 'Playfair Display', serif;
+  color: var(--main-title-color);
+  margin: 0 0 8px;
+  font-size: 24px;
+}
 
-    .auth-subtitle {
-      font-size: 13px;
-      color: var(--ink-soft);
-      margin: 0 0 20px;
-    }
+.auth-subtitle {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin: 0 0 20px;
+}
 
-    .auth-box input {
-      width: 100%;
-      border: 1px solid var(--border-color);
-      border-radius: 10px;
-      padding: 10px 14px;
-      font-family: inherit;
-      font-size: 13.5px;
-      margin-bottom: 10px;
-      background: var(--card-bg);
-      color: var(--ink);
-      outline: none;
-    }
+.auth-box input {
+  width: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-family: inherit;
+  font-size: 13.5px;
+  margin-bottom: 10px;
+  background: var(--card-bg);
+  color: var(--ink);
+  outline: none;
+}
 
-    .auth-error {
-      color: #e63946;
-      font-size: 12.5px;
-      min-height: 16px;
-      margin-bottom: 4px;
-    }
+.auth-error {
+  color: #e63946;
+  font-size: 12.5px;
+  min-height: 16px;
+  margin-bottom: 4px;
+}
 
-    .auth-note {
-      color: var(--primary-text);
-      font-size: 12.5px;
-      min-height: 16px;
-      margin-bottom: 8px;
-    }
+.auth-note {
+  color: var(--primary-text);
+  font-size: 12.5px;
+  min-height: 16px;
+  margin-bottom: 8px;
+}
 
-    .auth-btn-primary,
-    .auth-btn-secondary {
-      width: 100%;
-      border: none;
-      border-radius: 10px;
-      padding: 10px;
-      font-size: 13.5px;
-      font-weight: 600;
-      font-family: inherit;
-      cursor: pointer;
-      margin-top: 8px;
-    }
+.auth-btn-primary,
+.auth-btn-secondary {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  margin-top: 8px;
+}
 
-    .auth-btn-primary {
-      background: var(--primary-text);
-      color: #fff;
-    }
+.auth-btn-primary {
+  background: var(--primary-text);
+  color: #fff;
+}
 
-    .auth-btn-secondary {
-      background: transparent;
-      color: var(--primary-text);
-      border: 1px solid var(--primary-text);
-    }
+.auth-btn-secondary {
+  background: transparent;
+  color: var(--primary-text);
+  border: 1px solid var(--primary-text);
+}
 
-    .auth-btn-back {
-      width: 100%;
-      border: none;
-      background: transparent;
-      color: var(--ink-soft);
-      font-size: 12.5px;
-      font-family: inherit;
-      cursor: pointer;
-      padding: 8px;
-      margin-top: 4px;
-    }
+.auth-btn-back {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 12.5px;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 8px;
+  margin-top: 4px;
+}
 
-    .auth-btn-back:hover {
-      color: var(--primary-text);
-    }
+.auth-btn-back:hover {
+  color: var(--primary-text);
+}
 
-    .auth-box.hidden {
-      display: none;
-    }
+.auth-box.hidden {
+  display: none;
+}
 
-    /* Поле за парола с иконка "око" */
-    .password-field-wrap {
-      position: relative;
-      margin-bottom: 10px;
-    }
+/* Поле за парола с иконка "око" */
+.password-field-wrap {
+  position: relative;
+  margin-bottom: 10px;
+}
 
-    .password-field-wrap input {
-      padding-right: 46px;
-      margin-bottom: 0;
-    }
+.password-field-wrap input {
+  padding-right: 46px;
+  margin-bottom: 0;
+}
 
-    /* Скрива вградената иконка "покажи парола" на Edge/Chrome,
+/* Скрива вградената иконка "покажи парола" на Edge/Chrome,
        за да остане видима само нашата собствена иконка */
-    .password-field-wrap input::-ms-reveal,
-    .password-field-wrap input::-ms-clear {
-      display: none;
-    }
-
-    .password-field-wrap input::-webkit-credentials-auto-fill-button,
-    .password-field-wrap input::-webkit-strong-password-auto-fill-button {
-      display: none !important;
-      visibility: hidden;
-      pointer-events: none;
-      position: absolute;
-      right: 0;
-    }
-
-    .password-eye-btn {
-      position: absolute;
-      top: 50%;
-      right: 8px;
-      transform: translateY(-50%);
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      padding: 0;
-      color: var(--ink-soft);
-      opacity: 0.75;
-      transition: opacity 0.15s ease, color 0.15s ease;
-    }
-
-    .password-eye-btn svg {
-      width: 17px;
-      height: 17px;
-    }
-
-    .password-eye-btn:hover,
-    .password-eye-btn.active {
-      opacity: 1;
-      color: var(--primary-text);
-    }
-
-    .forgot-password-row {
-      text-align: right;
-      margin: 8px 0 4px;
-    }
-
-    .forgot-password-row a {
-      font-size: 12px;
-      color: var(--primary-text);
-      text-decoration: none;
-      opacity: 0.85;
-    }
-
-    .forgot-password-row a:hover {
-      text-decoration: underline;
-      opacity: 1;
-    }
-
-    /* Скрива съдържанието на приложението, докато не е потвърдена сесията / не е логнат[cite: 2] */
-    body.pre-auth header.hero,
-    body.pre-auth .wrap,
-    body.pre-auth footer,
-    body.pre-auth .theme-switcher-container,
-    body.pre-auth .scroll-top-btn {
-      display: none !important;
-    }
-
-    .auth-corner-btn {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 1500;
-      background: var(--primary-text);
-      color: #fff;
-      border: none;
-      padding: 10px 22px;
-      border-radius: 20px;
-      font-family: 'Poppins', sans-serif;
-      font-weight: 600;
-      font-size: 13px;
-      letter-spacing: 0.03em;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      transition: all 0.2s ease;
-    }
-
-    .auth-corner-btn:hover {
-      transform: scale(1.05);
-    }
-
-    .auth-corner-btn.hidden {
-      display: none;
-    }
-
-    .theme-btn-corner {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 1500;
-    }
-
-    .theme-btn-corner.hidden {
-      display: none;
-    }
-
-    .theme-switcher-container {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 1000;
-      display: flex;
-      gap: 8px;
-    }
-
-    .theme-btn {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      color: var(--primary-text);
-      padding: 8px 16px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-family: 'Poppins', sans-serif;
-      font-weight: 600;
-      font-size: 13px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(6px);
-      transition: all 0.2s ease;
-    }
-
-    .theme-btn:hover {
-      transform: scale(1.05);
-      background: var(--primary-base);
-    }
-
-    .wrap {
-      max-width: 1320px;
-      margin: 0 auto;
-      padding: 20px 15px 80px;
-      position: relative;
-      z-index: 1;
-    }
-
-    header.hero {
-      position: relative;
-      text-align: center;
-      padding: 60px 20px 20px;
-      z-index: 1;
-    }
-
-    h1.title {
-      font-family: 'Playfair Display', serif;
-      font-weight: 600;
-      font-size: clamp(32px, 5vw, 48px);
-      margin: 0 0 50px;
-      color: var(--main-title-color);
-      text-shadow:
-        0 0 8px rgba(255, 255, 255, 0.95),
-        0 0 16px rgba(255, 255, 255, 0.9),
-        1px 1px 0 rgba(255, 255, 255, 0.9),
-        -1px -1px 0 rgba(255, 255, 255, 0.9),
-        1px -1px 0 rgba(255, 255, 255, 0.9),
-        -1px 1px 0 rgba(255, 255, 255, 0.9),
-        0 4px 18px rgba(0, 0, 0, 0.18);
-    }
-
-    h1.title em {
-      font-style: italic;
-      color: var(--em-title-color);
-    }
-
-    /* Горна лента: Мисъл, Дата/Час и Радио */
-    .top-row-container {
-      max-width: 1300px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 20px;
-      align-items: stretch;
-    }
-
-    @media (max-width: 1024px) {
-      .top-row-container {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .daily-quote-box,
-    .live-clock-box,
-    .player-card-inline {
-      background: var(--card-bg);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.9);
-      border-radius: var(--radius-lg);
-      padding: 22px 24px;
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      height: 100%;
-    }
-
-    .daily-quote-box {
-      text-align: left;
-    }
-
-    .quote-icon {
-      font-size: 20px;
-      color: var(--gold);
-      margin-bottom: 2px;
-      display: block;
-    }
-
-    .daily-quote-box p {
-      margin: 0 0 8px;
-      font-style: italic;
-      font-family: 'Playfair Display', serif;
-      font-size: 16.5px;
-      color: var(--deep-heading);
-    }
-
-    .quote-footer {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      font-size: 11.5px;
-      color: var(--ink-soft);
-      border-top: 1px dashed var(--border-color);
-      padding-top: 8px;
-      margin-top: auto;
-    }
-
-    .live-clock-box {
-      flex-direction: row;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 16px;
-      text-align: left;
-    }
-
-    .clock-icon,
-    .player-art {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent-color), var(--primary-deep));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      flex-shrink: 0;
-      box-shadow: inset 0 0 0 3px var(--card-bg), 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    .clock-info,
-    .player-info {
-      flex: 1;
-      min-width: 120px;
-    }
-
-    .clock-date {
-      font-size: 13.5px;
-      color: var(--ink-soft);
-      font-weight: 500;
-      margin-bottom: 2px;
-    }
-
-    .clock-time {
-      font-family: 'Poppins', sans-serif;
-      font-size: 16px;
-      font-weight: 500;
-      color: var(--deep-heading);
-    }
-
-    .player-card-inline {
-      flex-direction: row;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 16px;
-      text-align: left;
-    }
-
-    .player-info .eyebrow-small {
-      font-size: 10.5px;
-      letter-spacing: 1.5px;
-      color: var(--ink-soft);
-      text-transform: uppercase;
-      margin-bottom: 2px;
-    }
-
-    .player-info h3 {
-      margin: 0;
-      font-size: 16px;
-      font-weight: 500;
-      color: var(--deep-heading);
-    }
-
-    .radio-control-box {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .radio-btn {
-      background: var(--primary-text);
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 42px;
-      height: 42px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 16px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-      transition: transform 0.2s, background 0.2s;
-    }
-
-    .radio-btn:hover {
-      transform: scale(1.05);
-    }
-
-    .radio-status {
-      font-size: 11px;
-      color: var(--ink-soft);
-    }
-
-    .hidden-radio-frame {
-      display: none;
-    }
-
-    .divider {
-      width: 60px;
-      height: 2px;
-      margin: 30px auto 0;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    }
-
-    section {
-      margin: 6px 0;
-      position: relative;
-      z-index: 1;
-    }
-
-    .section-head {
-      text-align: center;
-      margin-top: 40px;
-      margin-bottom: 40px;
-    }
-
-    .section-head h2 {
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-      font-size: 32px;
-      color: var(--main-title-color);
-      margin: 0 0 4px;
-      text-shadow: 0 1px 6px rgba(255, 255, 255, 0.9);
-    }
-
-    .card {
-      background: var(--card-bg);
-      backdrop-filter: blur(8px);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow);
-      padding: 24px;
-    }
-
-    /* Лента с 12-те месеца */
-    .months-quick-bar {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 6px;
-      margin-bottom: 18px;
-      overflow-x: auto;
-      padding-bottom: 4px;
-    }
-
-    @media (max-width: 1024px) {
-      .months-quick-bar {
-        grid-template-columns: repeat(6, 1fr);
-      }
-    }
-
-    @media (max-width: 600px) {
-      .months-quick-bar {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
-
-    .month-pill {
-      background: var(--card-inner-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 8px 4px;
-      text-align: center;
-      cursor: pointer;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--ink);
-      transition: all 0.2s ease;
-      white-space: nowrap;
-    }
-
-    .month-pill:hover {
-      background: var(--primary-base);
-      border-color: var(--primary-deep);
-      color: var(--primary-text);
-    }
-
-    .month-pill.active {
-      background: var(--primary-text);
-      color: #fff;
-      border-color: var(--primary-text);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    }
-
-    /* Календар */
-    .planner-top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-bottom: 20px;
-      border-bottom: 2px solid var(--border-color);
-      padding-bottom: 14px;
-    }
-
-    .planner-title-range {
-      font-family: 'Playfair Display', serif;
-      font-size: 16.5px;
-      color: var(--deep-heading);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .date-highlight {
-      color: var(--primary-text);
-      font-weight: 700;
-      font-size: 20px;
-      background: var(--primary-base);
-      padding: 2px 8px;
-      border-radius: 6px;
-      border: 1px solid var(--primary-deep);
-    }
-
-    .week-nav-btns {
-      display: flex;
-      gap: 8px;
-    }
-
-    .week-nav-btns button {
-      background: var(--card-inner-bg);
-      border: 1px solid var(--border-color);
-      color: var(--primary-text);
-      border-radius: 8px;
-      padding: 6px 12px;
-      cursor: pointer;
-      font-size: 12px;
-      font-weight: 500;
-    }
-
-    .week-nav-btns button:hover {
-      background: var(--primary-base);
-    }
-
-    .calendar-weekdays-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    @media (max-width: 1100px) {
-      .calendar-weekdays-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 600px) {
-      .calendar-weekdays-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .calendar-weekend-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    @media (max-width: 600px) {
-      .calendar-weekend-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .day-column {
-      background: var(--card-inner-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 10px;
-      padding: 10px;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-      transition: background 0.2s ease, border-color 0.2s ease;
-    }
-
-    /* Оцветяване на неработни дни — денят си остава напълно активен за писане */
-    .day-column.day-type-off {
-      background: #eeeeee;
-      border-color: #c9c9c9;
-    }
-
-    .day-column.day-type-off .day-name {
-      color: #6b6b6b;
-    }
-
-    .day-header {
-      text-align: center;
-      border-bottom: 2px solid var(--border-color);
-      padding-bottom: 6px;
-      margin-bottom: 8px;
-    }
-
-    .day-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--deep-heading);
-    }
-
-    .day-date {
-      font-size: 11px;
-      color: var(--ink-soft);
-    }
-
-    .day-type-select {
-      width: 100%;
-      margin-top: 6px;
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      padding: 2px 4px;
-      font-family: inherit;
-      font-size: 10px;
-      background: var(--card-inner-bg);
-      color: var(--ink);
-      outline: none;
-      cursor: pointer;
-    }
-
-    .time-slots-list {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      margin-bottom: 8px;
-    }
-
-    .time-slot-row {
-      display: flex;
-      flex-direction: column;
-      border-bottom: 1px solid var(--border-color);
-      padding: 3px 2px;
-      min-height: 28px;
-    }
-
-    .slot-header-info {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 10.5px;
-      color: var(--primary-text);
-      font-weight: 600;
-    }
-
-    .slot-header-info .add-inline-btn {
-      background: none;
-      border: none;
-      color: var(--ink-soft);
-      cursor: pointer;
-      font-size: 11px;
-      padding: 0 4px;
-    }
-
-    .slot-header-info .add-inline-btn:hover {
-      color: var(--primary-text);
-    }
-
-    .calendar-task-item,
-    .free-task-item {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      padding: 4px 6px;
-      font-size: 11.5px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 2px;
-    }
-
-    .calendar-task-item input[type="checkbox"],
-    .free-task-item input[type="checkbox"] {
-      accent-color: var(--primary-text);
-      cursor: pointer;
-      width: 14px;
-      height: 14px;
-    }
-
-    .calendar-task-item span,
-    .free-task-item span {
-      word-break: break-word;
-      flex: 1;
-      cursor: text;
-    }
-
-    .calendar-task-item.completed,
-    .free-task-item.completed {
-      opacity: 0.55;
-      text-decoration: line-through;
-      color: var(--ink-soft);
-    }
-
-    .del-btn {
-      background: none;
-      border: none;
-      color: var(--ink-soft);
-      cursor: pointer;
-      font-size: 11px;
-      margin-left: auto;
-    }
-
-    .del-btn:hover {
-      color: #e63946;
-    }
-
-    .calendar-task-item input[type="text"].edit-input,
-    .free-task-item input[type="text"].edit-input {
-      flex: 1;
-      font-size: 11.5px;
-      font-family: 'Poppins', sans-serif;
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
-      padding: 2px 4px;
-      background: var(--card-inner-bg);
-      color: var(--ink);
-    }
-
-    .free-notes-box {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      min-height: 140px;
-      margin-bottom: 8px;
-    }
-
-    .day-quick-add {
-      margin-top: auto;
-      border-top: 1px dashed var(--border-color);
-      padding-top: 8px;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .day-quick-add select,
-    .day-quick-add input {
-      width: 100%;
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      padding: 4px 6px;
-      font-family: inherit;
-      font-size: 11px;
-      background: var(--card-inner-bg);
-      color: var(--ink);
-      outline: none;
-    }
-
-    .day-quick-add button {
-      background: var(--primary-text);
-      color: white;
-      border: none;
-      border-radius: 6px;
-      padding: 5px;
-      font-size: 11px;
-      cursor: pointer;
-      font-weight: 500;
-    }
-
-    /* Напомняния и бележки */
-    .reminders-section {
-      margin-top: 20px;
-      background: var(--secondary-box-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 16px;
-    }
-
-    .reminders-section h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 15px;
-      color: var(--deep-heading);
-      margin: 0 0 10px;
-    }
-
-    .reminders-input-box {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-
-    .reminders-input-box input {
-      flex: 1;
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 8px 12px;
-      font-family: inherit;
-      font-size: 12.5px;
-      background: var(--card-inner-bg);
-      outline: none;
-    }
-
-    .reminders-input-box button {
-      background: var(--primary-text);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 8px 14px;
-      font-size: 12.5px;
-      cursor: pointer;
-    }
-
-    .reminders-list {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .reminder-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--card-inner-bg);
-      padding: 6px 10px;
-      border-radius: 8px;
-      font-size: 12.5px;
-      border: 1px solid var(--border-color);
-    }
-
-    .reminder-item input[type="checkbox"] {
-      accent-color: var(--primary-text);
-      width: 15px;
-      height: 15px;
-      cursor: pointer;
-    }
-
-    .reminder-item.done {
-      opacity: 0.5;
-      text-decoration: line-through;
-    }
-
-    .reminder-item .txt {
-      flex: 1;
-      cursor: text;
-    }
-
-    .reminder-item .del {
-      background: none;
-      border: none;
-      color: var(--ink-soft);
-      cursor: pointer;
-    }
-
-    .notes-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 18px;
-      max-width: 1300px;
-      margin: 0 auto;
-      align-items: start;
-    }
-
-    @media (max-width: 1000px) {
-      .notes-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .notes-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .notes-card {
-      height: 340px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    @media (max-width: 640px) {
-      .notes-card {
-        height: auto;
-        max-height: 420px;
-      }
-    }
-
-    .notes-card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 16px;
-      color: var(--deep-heading);
-      margin: 0 0 10px;
-      flex-shrink: 0;
-    }
-
-    #notes-area {
-      width: 100%;
-      flex: 1;
-      min-height: 0;
-      border: 1px solid var(--border-color);
-      border-radius: 10px;
-      padding: 10px;
-      font-family: inherit;
-      font-size: 13px;
-      background: var(--notes-bg);
-      color: var(--ink);
-      resize: none;
-      outline: none;
-      overflow-y: auto;
-    }
-
-    .links-list {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      margin-bottom: 10px;
-      flex: 1;
-      min-height: 0;
-      overflow-y: auto;
-      padding-right: 2px;
-    }
-
-    .link-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--notes-bg);
-      border-radius: 8px;
-      padding: 6px 10px;
-      font-size: 13px;
-    }
-
-    .link-item a {
-      color: var(--primary-text);
-      text-decoration: none;
-      flex: 1;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .link-item .del {
-      background: none;
-      border: none;
-      color: var(--ink-soft);
-      cursor: pointer;
-    }
-
-    .add-link {
-      display: flex;
-      gap: 6px;
-      flex-shrink: 0;
-    }
-
-    .add-link input {
-      flex: 1;
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 6px 10px;
-      font-family: inherit;
-      font-size: 12px;
-      background: var(--card-inner-bg);
-      outline: none;
-    }
-
-    .add-link button {
-      background: var(--primary-text);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 6px 12px;
-      cursor: pointer;
-      font-size: 12px;
-    }
-
-    /* === Тефтерче (лични записи с търсене) === */
-    .notebook-card {
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* Затворена корица */
-    .notebook-cover {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      gap: 4px;
-      flex: 1;
-      min-height: 0;
-      padding: 10px 6px;
-    }
-
-    .notebook-cover.hidden {
-      display: none;
-    }
-
-    .notebook-cover-icon {
-      font-size: 38px;
-      line-height: 1;
-      margin-bottom: 6px;
-      filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.15));
-    }
-
-    .notebook-cover-title {
-      margin: 0 0 2px;
-      font-family: 'Playfair Display', serif;
-      font-size: 17px;
-      color: var(--deep-heading);
-    }
-
-    .notebook-cover-sub {
-      margin: 0 0 12px;
-      font-size: 11.5px;
-      color: var(--ink-soft);
-    }
-
-    #notebookOpenBtn {
-      background: var(--primary-text);
-      color: #fff;
-      border: none;
-      border-radius: 20px;
-      padding: 9px 26px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-      transition: transform 0.15s ease;
-    }
-
-    #notebookOpenBtn:hover {
-      transform: scale(1.05);
-    }
-
-    /* Отворено тефтерче */
-    .notebook-open-view {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-      min-height: 0;
-    }
-
-    .notebook-open-view.hidden {
-      display: none;
-    }
-
-    .notebook-open-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 10px;
-      flex-shrink: 0;
-    }
-
-    .notebook-open-head h3 {
-      margin: 0;
-    }
-
-    .notebook-close-btn {
-      background: none;
-      border: none;
-      font-size: 15px;
-      color: var(--ink-soft);
-      cursor: pointer;
-      padding: 2px 6px;
-      line-height: 1;
-    }
-
-    .notebook-close-btn:hover {
-      color: #e63946;
-    }
-
-    .notebook-toolbar {
-      flex-shrink: 0;
-    }
-
-    .notebook-add-form {
-      flex-shrink: 0;
-    }
-
-    .notebook-open-view .notebook-list {
-      flex: 1;
-      min-height: 0;
-      overflow-y: auto;
-      padding-right: 4px;
-    }
-
-    .notebook-toolbar {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 12px;
-      flex-wrap: wrap;
-    }
-
-    .notebook-toolbar input {
-      flex: 1;
-      min-width: 180px;
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 9px 14px;
-      font-family: inherit;
-      font-size: 13px;
-      background: var(--card-inner-bg);
-      color: var(--ink);
-      outline: none;
-    }
-
-    .notebook-toolbar button {
-      background: var(--primary-text);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 9px 16px;
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    .notebook-add-form {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      background: var(--secondary-box-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 14px;
-      margin-bottom: 14px;
-    }
-
-    .notebook-add-form.hidden {
-      display: none;
-    }
-
-    .notebook-add-form input,
-    .notebook-add-form textarea,
-    .notebook-edit-title,
-    .notebook-edit-content {
-      width: 100%;
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 9px 12px;
-      font-family: inherit;
-      font-size: 13px;
-      background: var(--card-inner-bg);
-      color: var(--ink);
-      outline: none;
-    }
-
-    .notebook-add-form textarea,
-    .notebook-edit-content {
-      min-height: 90px;
-      resize: vertical;
-    }
-
-    .notebook-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .notebook-empty {
-      font-size: 12.5px;
-      color: var(--ink-soft);
-      font-style: italic;
-      text-align: center;
-      padding: 16px 4px;
-    }
-
-    .notebook-item {
-      background: var(--card-inner-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 10px;
-      padding: 10px 14px;
-    }
-
-    .notebook-item-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      cursor: pointer;
-    }
-
-    .notebook-item-title {
-      font-weight: 600;
-      color: var(--deep-heading);
-      font-size: 13.5px;
-      word-break: break-word;
-    }
-
-    .notebook-item-caret {
-      color: var(--ink-soft);
-      font-size: 10px;
-      flex-shrink: 0;
-    }
-
-    .notebook-item-preview {
-      font-size: 12px;
-      color: var(--ink-soft);
-      margin-top: 4px;
-      word-break: break-word;
-    }
-
-    .notebook-item-body {
-      font-size: 12.5px;
-      color: var(--ink);
-      margin-top: 8px;
-      padding-top: 8px;
-      border-top: 1px dashed var(--border-color);
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-
-    .notebook-item-btns {
-      display: flex;
-      gap: 8px;
-      margin-top: 10px;
-      flex-wrap: wrap;
-    }
-
-    .notebook-item-btns button {
-      background: var(--primary-text);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 6px 12px;
-      font-size: 12px;
-      cursor: pointer;
-    }
-
-    .notebook-item-btns button.btn-cancel-inline,
-    #notebookCancelBtn {
-      background: #e9ecef;
-      color: #333;
-    }
-
-    .notebook-item.editing {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    /* Модал за потвърждение */
-    .custom-modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(3px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.25s ease;
-    }
-
-    .custom-modal-overlay.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .custom-modal {
-      background: var(--card-inner-bg);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-      padding: 28px 32px;
-      max-width: 400px;
-      width: 90%;
-      text-align: center;
-    }
-
-    .custom-modal h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 20px;
-      color: var(--deep-heading);
-      margin: 0 0 10px;
-    }
-
-    .custom-modal p {
-      font-size: 13.5px;
-      color: var(--ink);
-      margin: 0 0 24px;
-    }
-
-    .custom-modal-btns {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-    }
-
-    .custom-modal-btns button {
-      border-radius: 10px;
-      padding: 8px 20px;
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      border: none;
-      font-family: inherit;
-    }
-
-    .btn-cancel {
-      background: #e9ecef;
-      color: #333;
-    }
-
-    .btn-confirm {
-      background: var(--primary-text);
-      color: white;
-    }
-
-    footer {
-      text-align: center;
-      padding: 30px 20px 0;
-      text-shadow: 0 1px 4px rgba(255, 255, 255, 0.8);
-    }
-
-    footer .footer-line {
-      display: block;
-      /* Умишлено БЕЗ 'Poppins' тук: Poppins няма кирилски букви, затова
+.password-field-wrap input::-ms-reveal,
+.password-field-wrap input::-ms-clear {
+  display: none;
+}
+
+.password-field-wrap input::-webkit-credentials-auto-fill-button,
+.password-field-wrap input::-webkit-strong-password-auto-fill-button {
+  display: none !important;
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}
+
+.password-eye-btn {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  color: var(--ink-soft);
+  opacity: 0.75;
+  transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.password-eye-btn svg {
+  width: 17px;
+  height: 17px;
+}
+
+.password-eye-btn:hover,
+.password-eye-btn.active {
+  opacity: 1;
+  color: var(--primary-text);
+}
+
+.forgot-password-row {
+  text-align: right;
+  margin: 8px 0 4px;
+}
+
+.forgot-password-row a {
+  font-size: 12px;
+  color: var(--primary-text);
+  text-decoration: none;
+  opacity: 0.85;
+}
+
+.forgot-password-row a:hover {
+  text-decoration: underline;
+  opacity: 1;
+}
+
+/* Скрива съдържанието на приложението, докато не е потвърдена сесията / не е логнат[cite: 2] */
+body.pre-auth header.hero,
+body.pre-auth .wrap,
+body.pre-auth footer,
+body.pre-auth .theme-switcher-container,
+body.pre-auth .scroll-top-btn {
+  display: none !important;
+}
+
+.auth-corner-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1500;
+  background: var(--primary-text);
+  color: #fff;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 20px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+}
+
+.auth-corner-btn:hover {
+  transform: scale(1.05);
+}
+
+.auth-corner-btn.hidden {
+  display: none;
+}
+
+.theme-btn-corner {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1500;
+}
+
+.theme-btn-corner.hidden {
+  display: none;
+}
+
+.theme-switcher-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  gap: 8px;
+}
+
+.theme-btn {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--primary-text);
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6px);
+  transition: all 0.2s ease;
+}
+
+.theme-btn:hover {
+  transform: scale(1.05);
+  background: var(--primary-base);
+}
+
+.wrap {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 20px 15px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+header.hero {
+  position: relative;
+  text-align: center;
+  padding: 60px 20px 20px;
+  z-index: 1;
+}
+
+h1.title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  font-size: clamp(32px, 5vw, 48px);
+  margin: 0 0 50px;
+  color: var(--main-title-color);
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, 0.95),
+    0 0 16px rgba(255, 255, 255, 0.9),
+    1px 1px 0 rgba(255, 255, 255, 0.9),
+    -1px -1px 0 rgba(255, 255, 255, 0.9),
+    1px -1px 0 rgba(255, 255, 255, 0.9),
+    -1px 1px 0 rgba(255, 255, 255, 0.9),
+    0 4px 18px rgba(0, 0, 0, 0.18);
+}
+
+h1.title em {
+  font-style: italic;
+  color: var(--em-title-color);
+}
+
+/* Горна лента: Мисъл, Дата/Час и Радио */
+.top-row-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  align-items: stretch;
+}
+
+@media (max-width: 1024px) {
+  .top-row-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.daily-quote-box,
+.live-clock-box,
+.player-card-inline {
+  background: var(--card-bg);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: var(--radius-lg);
+  padding: 22px 24px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.daily-quote-box {
+  text-align: left;
+}
+
+.quote-icon {
+  font-size: 20px;
+  color: var(--gold);
+  margin-bottom: 2px;
+  display: block;
+}
+
+.daily-quote-box p {
+  margin: 0 0 8px;
+  font-style: italic;
+  font-family: 'Playfair Display', serif;
+  font-size: 16.5px;
+  color: var(--deep-heading);
+}
+
+.quote-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 11.5px;
+  color: var(--ink-soft);
+  border-top: 1px dashed var(--border-color);
+  padding-top: 8px;
+  margin-top: auto;
+}
+
+.live-clock-box {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16px;
+  text-align: left;
+}
+
+.clock-icon,
+.player-art {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-color), var(--primary-deep));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+  box-shadow: inset 0 0 0 3px var(--card-bg), 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.clock-info,
+.player-info {
+  flex: 1;
+  min-width: 120px;
+}
+
+.clock-date {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.clock-time {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--deep-heading);
+}
+
+.player-card-inline {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16px;
+  text-align: left;
+}
+
+.player-info .eyebrow-small {
+  font-size: 10.5px;
+  letter-spacing: 1.5px;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.player-info h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--deep-heading);
+}
+
+.radio-control-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.radio-btn {
+  background: var(--primary-text);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s, background 0.2s;
+}
+
+.radio-btn:hover {
+  transform: scale(1.05);
+}
+
+.radio-status {
+  font-size: 11px;
+  color: var(--ink-soft);
+}
+
+.hidden-radio-frame {
+  display: none;
+}
+
+.divider {
+  width: 60px;
+  height: 2px;
+  margin: 30px auto 0;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+section {
+  margin: 6px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.section-head {
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.section-head h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 32px;
+  color: var(--main-title-color);
+  margin: 0 0 4px;
+  text-shadow: 0 1px 6px rgba(255, 255, 255, 0.9);
+}
+
+.card {
+  background: var(--card-bg);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+
+/* Лента с 12-те месеца */
+.months-quick-bar {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 6px;
+  margin-bottom: 18px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+@media (max-width: 1024px) {
+  .months-quick-bar {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .months-quick-bar {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.month-pill {
+  background: var(--card-inner-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 8px 4px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.month-pill:hover {
+  background: var(--primary-base);
+  border-color: var(--primary-deep);
+  color: var(--primary-text);
+}
+
+.month-pill.active {
+  background: var(--primary-text);
+  color: #fff;
+  border-color: var(--primary-text);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Календар */
+.planner-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 14px;
+}
+
+.planner-title-range {
+  font-family: 'Playfair Display', serif;
+  font-size: 16.5px;
+  color: var(--deep-heading);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.date-highlight {
+  color: var(--primary-text);
+  font-weight: 700;
+  font-size: 20px;
+  background: var(--primary-base);
+  padding: 2px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--primary-deep);
+}
+
+.week-nav-btns {
+  display: flex;
+  gap: 8px;
+}
+
+.week-nav-btns button {
+  background: var(--card-inner-bg);
+  border: 1px solid var(--border-color);
+  color: var(--primary-text);
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.week-nav-btns button:hover {
+  background: var(--primary-base);
+}
+
+.calendar-weekdays-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 1100px) {
+  .calendar-weekdays-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .calendar-weekdays-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.calendar-weekend-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 600px) {
+  .calendar-weekend-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.day-column {
+  background: var(--card-inner-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+/* Оцветяване на неработни дни — денят си остава напълно активен за писане */
+.day-column.day-type-off {
+  background: #eeeeee;
+  border-color: #c9c9c9;
+}
+
+.day-column.day-type-off .day-name {
+  color: #6b6b6b;
+}
+
+.day-header {
+  text-align: center;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 6px;
+  margin-bottom: 8px;
+}
+
+.day-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--deep-heading);
+}
+
+.day-date {
+  font-size: 11px;
+  color: var(--ink-soft);
+}
+
+.day-type-select {
+  width: 100%;
+  margin-top: 6px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 2px 4px;
+  font-family: inherit;
+  font-size: 10px;
+  background: var(--card-inner-bg);
+  color: var(--ink);
+  outline: none;
+  cursor: pointer;
+}
+
+.time-slots-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 8px;
+}
+
+.time-slot-row {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--border-color);
+  padding: 3px 2px;
+  min-height: 28px;
+}
+
+.slot-header-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10.5px;
+  color: var(--primary-text);
+  font-weight: 600;
+}
+
+.slot-header-info .add-inline-btn {
+  background: none;
+  border: none;
+  color: var(--ink-soft);
+  cursor: pointer;
+  font-size: 11px;
+  padding: 0 4px;
+}
+
+.slot-header-info .add-inline-btn:hover {
+  color: var(--primary-text);
+}
+
+.calendar-task-item,
+.free-task-item {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 4px 6px;
+  font-size: 11.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.calendar-task-item input[type="checkbox"],
+.free-task-item input[type="checkbox"] {
+  accent-color: var(--primary-text);
+  cursor: pointer;
+  width: 14px;
+  height: 14px;
+}
+
+.calendar-task-item span,
+.free-task-item span {
+  word-break: break-word;
+  flex: 1;
+  cursor: text;
+}
+
+.calendar-task-item.completed,
+.free-task-item.completed {
+  opacity: 0.55;
+  text-decoration: line-through;
+  color: var(--ink-soft);
+}
+
+.del-btn {
+  background: none;
+  border: none;
+  color: var(--ink-soft);
+  cursor: pointer;
+  font-size: 11px;
+  margin-left: auto;
+}
+
+.del-btn:hover {
+  color: #e63946;
+}
+
+.calendar-task-item input[type="text"].edit-input,
+.free-task-item input[type="text"].edit-input {
+  flex: 1;
+  font-size: 11.5px;
+  font-family: 'Poppins', sans-serif;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 2px 4px;
+  background: var(--card-inner-bg);
+  color: var(--ink);
+}
+
+.free-notes-box {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 140px;
+  margin-bottom: 8px;
+}
+
+.day-quick-add {
+  margin-top: auto;
+  border-top: 1px dashed var(--border-color);
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.day-quick-add select,
+.day-quick-add input {
+  width: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 4px 6px;
+  font-family: inherit;
+  font-size: 11px;
+  background: var(--card-inner-bg);
+  color: var(--ink);
+  outline: none;
+}
+
+.day-quick-add button {
+  background: var(--primary-text);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 5px;
+  font-size: 11px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+/* Напомняния и бележки */
+.reminders-section {
+  margin-top: 20px;
+  background: var(--secondary-box-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.reminders-section h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  color: var(--deep-heading);
+  margin: 0 0 10px;
+}
+
+.reminders-input-box {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.reminders-input-box input {
+  flex: 1;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-family: inherit;
+  font-size: 12.5px;
+  background: var(--card-inner-bg);
+  outline: none;
+}
+
+.reminders-input-box button {
+  background: var(--primary-text);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 12.5px;
+  cursor: pointer;
+}
+
+.reminders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.reminder-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--card-inner-bg);
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  border: 1px solid var(--border-color);
+}
+
+.reminder-item input[type="checkbox"] {
+  accent-color: var(--primary-text);
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+.reminder-item.done {
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+
+.reminder-item .txt {
+  flex: 1;
+  cursor: text;
+}
+
+.reminder-item .del {
+  background: none;
+  border: none;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 18px;
+  max-width: 1300px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+@media (max-width: 1000px) {
+  .notes-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .notes-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.notes-card {
+  height: 340px;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 640px) {
+  .notes-card {
+    height: auto;
+    max-height: 420px;
+  }
+}
+
+.notes-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  color: var(--deep-heading);
+  margin: 0 0 10px;
+  flex-shrink: 0;
+}
+
+#notes-area {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 10px;
+  font-family: inherit;
+  font-size: 13px;
+  background: var(--notes-bg);
+  color: var(--ink);
+  resize: none;
+  outline: none;
+  overflow-y: auto;
+}
+
+.links-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+.link-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--notes-bg);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 13px;
+}
+
+.link-item a {
+  color: var(--primary-text);
+  text-decoration: none;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.link-item .del {
+  background: none;
+  border: none;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.add-link {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.add-link input {
+  flex: 1;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-family: inherit;
+  font-size: 12px;
+  background: var(--card-inner-bg);
+  outline: none;
+}
+
+.add-link button {
+  background: var(--primary-text);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+/* === Тефтерче (лични записи с търсене) === */
+.notebook-card {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Затворена корица */
+.notebook-cover {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 4px;
+  flex: 1;
+  min-height: 0;
+  padding: 10px 6px;
+}
+
+.notebook-cover.hidden {
+  display: none;
+}
+
+.notebook-cover-icon {
+  font-size: 38px;
+  line-height: 1;
+  margin-bottom: 6px;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.15));
+}
+
+.notebook-cover-title {
+  margin: 0 0 2px;
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  color: var(--deep-heading);
+}
+
+.notebook-cover-sub {
+  margin: 0 0 12px;
+  font-size: 11.5px;
+  color: var(--ink-soft);
+}
+
+#notebookOpenBtn {
+  background: var(--primary-text);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 9px 26px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transition: transform 0.15s ease;
+}
+
+#notebookOpenBtn:hover {
+  transform: scale(1.05);
+}
+
+/* Отворено тефтерче */
+.notebook-open-view {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.notebook-open-view.hidden {
+  display: none;
+}
+
+.notebook-open-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-shrink: 0;
+}
+
+.notebook-open-head h3 {
+  margin: 0;
+}
+
+.notebook-close-btn {
+  background: none;
+  border: none;
+  font-size: 15px;
+  color: var(--ink-soft);
+  cursor: pointer;
+  padding: 2px 6px;
+  line-height: 1;
+}
+
+.notebook-close-btn:hover {
+  color: #e63946;
+}
+
+.notebook-toolbar {
+  flex-shrink: 0;
+}
+
+.notebook-add-form {
+  flex-shrink: 0;
+}
+
+.notebook-open-view .notebook-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.notebook-toolbar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.notebook-toolbar input {
+  flex: 1;
+  min-width: 180px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 9px 14px;
+  font-family: inherit;
+  font-size: 13px;
+  background: var(--card-inner-bg);
+  color: var(--ink);
+  outline: none;
+}
+
+.notebook-toolbar button {
+  background: var(--primary-text);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 9px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.notebook-add-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--secondary-box-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 14px;
+}
+
+.notebook-add-form.hidden {
+  display: none;
+}
+
+.notebook-add-form input,
+.notebook-add-form textarea,
+.notebook-edit-title,
+.notebook-edit-content {
+  width: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 9px 12px;
+  font-family: inherit;
+  font-size: 13px;
+  background: var(--card-inner-bg);
+  color: var(--ink);
+  outline: none;
+}
+
+.notebook-add-form textarea,
+.notebook-edit-content {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.notebook-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.notebook-empty {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  font-style: italic;
+  text-align: center;
+  padding: 16px 4px;
+}
+
+.notebook-item {
+  background: var(--card-inner-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+
+.notebook-item-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.notebook-item-title {
+  font-weight: 600;
+  color: var(--deep-heading);
+  font-size: 13.5px;
+  word-break: break-word;
+}
+
+.notebook-item-caret {
+  color: var(--ink-soft);
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+.notebook-item-preview {
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-top: 4px;
+  word-break: break-word;
+}
+
+.notebook-item-body {
+  font-size: 12.5px;
+  color: var(--ink);
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border-color);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.notebook-item-btns {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.notebook-item-btns button {
+  background: var(--primary-text);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.notebook-item-btns button.btn-cancel-inline,
+#notebookCancelBtn {
+  background: #e9ecef;
+  color: #333;
+}
+
+.notebook-item.editing {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Модал за потвърждение */
+.custom-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.custom-modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.custom-modal {
+  background: var(--card-inner-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  padding: 28px 32px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+}
+
+.custom-modal h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  color: var(--deep-heading);
+  margin: 0 0 10px;
+}
+
+.custom-modal p {
+  font-size: 13.5px;
+  color: var(--ink);
+  margin: 0 0 24px;
+}
+
+.custom-modal-btns {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.custom-modal-btns button {
+  border-radius: 10px;
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+.btn-cancel {
+  background: #e9ecef;
+  color: #333;
+}
+
+.btn-confirm {
+  background: var(--primary-text);
+  color: white;
+}
+
+footer {
+  text-align: center;
+  padding: 30px 20px 0;
+  text-shadow: 0 1px 4px rgba(255, 255, 255, 0.8);
+}
+
+footer .footer-line {
+  display: block;
+  /* Умишлено БЕЗ 'Poppins' тук: Poppins няма кирилски букви, затова
          кирилицата пада на резервния шрифт, докато цифри/© се изписват
          с истинския Poppins — смесица от два шрифта в един ред.
          Затова карame целия футър да ползва директно резервния шрифт. */
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 13.5px;
-      font-weight: 600;
-      line-height: 1.4;
-      color: var(--deep-heading);
-    }
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--deep-heading);
+}
 
-    footer .heart {
-      color: var(--primary-text);
-      font-size: 26px;
-      font-weight: 700;
-      vertical-align: middle;
-      display: inline-block;
-      line-height: 1;
-    }
+footer .heart {
+  color: var(--primary-text);
+  font-size: 26px;
+  font-weight: 700;
+  vertical-align: middle;
+  display: inline-block;
+  line-height: 1;
+}
 
-    footer .footer-copyright {
-      margin-top: 6px;
-    }
+footer .footer-copyright {
+  margin-top: 6px;
+}
 
-    .scroll-top-btn {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      background: rgba(120, 120, 130, 0.28);
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      color: var(--ink);
-      font-size: 22px;
-      font-weight: 900;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      backdrop-filter: blur(10px) saturate(140%);
-      -webkit-backdrop-filter: blur(10px) saturate(140%);
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18), inset 0 0 0 1px rgba(255, 255, 255, 0.15);
-      z-index: 999;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(10px);
-      transition: opacity 0.25s ease, transform 0.25s ease, background 0.2s ease;
-    }
+.scroll-top-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(120, 120, 130, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: var(--ink);
+  font-size: 22px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18), inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease, background 0.2s ease;
+}
 
-    .scroll-top-btn.visible {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
+.scroll-top-btn.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
 
-    .scroll-top-btn:hover {
-      background: rgba(100, 100, 110, 0.4);
-      transform: translateY(-2px);
-    }
+.scroll-top-btn:hover {
+  background: rgba(100, 100, 110, 0.4);
+  transform: translateY(-2px);
+}
 
-    /* ======================================================
+/* ======================================================
        МОБИЛЕН RESPONSIVE ДИЗАЙН
        ====================================================== */
 
-    @media (max-width: 768px) {
+@media (max-width: 768px) {
 
-      /* --- Начален (pre-auth) екран --- */
-      .auth-corner-btn {
-        top: 12px;
-        right: 12px;
-        padding: 9px 16px;
-        font-size: 12px;
-      }
+  /* --- Начален (pre-auth) екран --- */
+  .auth-corner-btn {
+    top: 12px;
+    right: 12px;
+    padding: 9px 16px;
+    font-size: 12px;
+  }
 
-      .theme-btn-corner {
-        bottom: 12px;
-        right: 12px;
-        padding: 7px 14px;
-        font-size: 12px;
-      }
+  .theme-btn-corner {
+    bottom: 12px;
+    right: 12px;
+    padding: 7px 14px;
+    font-size: 12px;
+  }
 
-      .auth-box {
-        padding: 24px 18px;
-        max-width: 100%;
-      }
+  .auth-box {
+    padding: 24px 18px;
+    max-width: 100%;
+  }
 
-      .auth-box h2 {
-        font-size: 20px;
-      }
+  .auth-box h2 {
+    font-size: 20px;
+  }
 
-      /* --- Приложение: горни бутони (тема / изход) --- */
-      .theme-switcher-container {
-        top: 10px;
-        right: 10px;
-        gap: 6px;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-        max-width: calc(100% - 20px);
-      }
+  /* --- Приложение: горни бутони (тема / изход) --- */
+  .theme-switcher-container {
+    top: 10px;
+    right: 10px;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    max-width: calc(100% - 20px);
+  }
 
-      .theme-btn {
-        padding: 7px 12px;
-        font-size: 11.5px;
-      }
+  .theme-btn {
+    padding: 7px 12px;
+    font-size: 11.5px;
+  }
 
-      /* --- Header --- */
-      header.hero {
-        padding: 90px 12px 12px;
-      }
+  /* --- Header --- */
+  header.hero {
+    padding: 90px 12px 12px;
+  }
 
-      h1.title {
-        font-size: 26px;
-        margin-bottom: 24px;
-      }
+  h1.title {
+    font-size: 26px;
+    margin-bottom: 24px;
+  }
 
-      .top-row-container {
-        gap: 12px;
-      }
+  .top-row-container {
+    gap: 12px;
+  }
 
-      .daily-quote-box,
-      .live-clock-box,
-      .player-card-inline {
-        padding: 16px 16px;
-      }
+  .daily-quote-box,
+  .live-clock-box,
+  .player-card-inline {
+    padding: 16px 16px;
+  }
 
-      .daily-quote-box p {
-        font-size: 14.5px;
-      }
+  .daily-quote-box p {
+    font-size: 14.5px;
+  }
 
-      .clock-time {
-        font-size: 15px;
-      }
+  .clock-time {
+    font-size: 15px;
+  }
 
-      /* --- Wrap / контейнер --- */
-      .wrap {
-        padding: 12px 8px 60px;
-      }
+  /* --- Wrap / контейнер --- */
+  .wrap {
+    padding: 12px 8px 60px;
+  }
 
-      .card {
-        padding: 14px;
-        border-radius: 16px;
-      }
+  .card {
+    padding: 14px;
+    border-radius: 16px;
+  }
 
-      /* --- Лента с месеци: хоризонтално превъртане вместо смачкан grid --- */
-      .months-quick-bar {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr); /* 4 x 3 реда = 12 месеца */
-        overflow-x: visible;
-        gap: 6px;
-      }
+  /* --- Лента с месеци: хоризонтално превъртане вместо смачкан grid --- */
+  .months-quick-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 x 3 реда = 12 месеца */
+    overflow-x: visible;
+    gap: 6px;
+  }
 
-      .month-pill {
-        min-width: 0;
-        padding: 8px 0;
-        font-size: clamp(9px, 3vw, 12px); /* побира се и на най-тесните екрани */
-        overflow: hidden;
-      }
+  .month-pill {
+    min-width: 0;
+    padding: 8px 0;
+    font-size: clamp(9px, 3vw, 12px);
+    /* побира се и на най-тесните екрани */
+    overflow: hidden;
+  }
 
-      /* --- Планер: горна лента с навигация --- */
-      .planner-top-bar {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
-      }
+  /* --- Планер: горна лента с навигация --- */
+  .planner-top-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
 
-      .planner-title-range {
-        justify-content: center;
-        text-align: center;
-        font-size: 14px;
-      }
+  .planner-title-range {
+    justify-content: center;
+    text-align: center;
+    font-size: 14px;
+  }
 
-      .date-highlight {
-        font-size: 16px;
-      }
+  .date-highlight {
+    font-size: 16px;
+  }
 
-      .week-nav-btns {
-        justify-content: center;
-        flex-wrap: wrap;
-      }
+  .week-nav-btns {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 
-      .week-nav-btns button {
-        flex: 1;
-        min-width: 90px;
-      }
+  .week-nav-btns button {
+    flex: 1;
+    min-width: 90px;
+  }
 
-      /* --- Календар: единична колона на мобилно --- */
-      .calendar-weekdays-grid,
-      .calendar-weekend-grid {
-        grid-template-columns: 1fr;
-      }
+  /* --- Календар: единична колона на мобилно --- */
+  .calendar-weekdays-grid,
+  .calendar-weekend-grid {
+    grid-template-columns: 1fr;
+  }
 
-      .day-column {
-        padding: 12px;
-      }
+  .day-column {
+    padding: 12px;
+  }
 
-      /* --- Секции --- */
-      .section-head {
-        margin-top: 28px;
-        margin-bottom: 24px;
-      }
+  /* --- Секции --- */
+  .section-head {
+    margin-top: 28px;
+    margin-bottom: 24px;
+  }
 
-      .section-head h2 {
-        font-size: 24px;
-      }
+  .section-head h2 {
+    font-size: 24px;
+  }
 
-      /* --- Бележки / линкове / тефтерче: единична колона --- */
-      .notes-grid {
-        grid-template-columns: 1fr;
-      }
+  /* --- Бележки / линкове / тефтерче: единична колона --- */
+  .notes-grid {
+    grid-template-columns: 1fr;
+  }
 
-      .notes-card {
-        height: auto;
-        max-height: none;
-      }
+  .notes-card {
+    height: auto;
+    max-height: none;
+  }
 
-      #notes-area {
-        min-height: 140px;
-      }
+  #notes-area {
+    min-height: 140px;
+  }
 
-      .links-list {
-        max-height: 220px;
-      }
+  .links-list {
+    max-height: 220px;
+  }
 
-      .add-link {
-        flex-direction: column;
-      }
+  .add-link {
+    flex-direction: column;
+  }
 
-      .add-link button {
-        width: 100%;
-        padding: 9px;
-      }
+  .add-link button {
+    width: 100%;
+    padding: 9px;
+  }
 
-      /* --- Тефтерче на мобилно --- */
-      .notebook-toolbar {
-        flex-direction: column;
-      }
+  /* --- Тефтерче на мобилно --- */
+  .notebook-toolbar {
+    flex-direction: column;
+  }
 
-      .notebook-toolbar input,
-      .notebook-toolbar button {
-        width: 100%;
-        min-width: 0;
-      }
+  .notebook-toolbar input,
+  .notebook-toolbar button {
+    width: 100%;
+    min-width: 0;
+  }
 
-      .notebook-open-view .notebook-list {
-        max-height: 280px;
-      }
+  .notebook-open-view .notebook-list {
+    max-height: 280px;
+  }
 
-      .notebook-item-btns {
-        flex-direction: column;
-      }
+  .notebook-item-btns {
+    flex-direction: column;
+  }
 
-      .notebook-item-btns button {
-        width: 100%;
-      }
+  .notebook-item-btns button {
+    width: 100%;
+  }
 
-      /* --- Напомняния --- */
-      .reminders-input-box {
-        flex-direction: column;
-      }
+  /* --- Напомняния --- */
+  .reminders-input-box {
+    flex-direction: column;
+  }
 
-      .reminders-input-box button {
-        width: 100%;
-        padding: 9px;
-      }
+  .reminders-input-box button {
+    width: 100%;
+    padding: 9px;
+  }
 
-      /* --- Модал за потвърждение --- */
-      .custom-modal {
-        padding: 22px 20px;
-        width: 92%;
-      }
+  /* --- Модал за потвърждение --- */
+  .custom-modal {
+    padding: 22px 20px;
+    width: 92%;
+  }
 
-      .custom-modal-btns {
-        flex-direction: column;
-      }
+  .custom-modal-btns {
+    flex-direction: column;
+  }
 
-      .custom-modal-btns button {
-        width: 100%;
-      }
+  .custom-modal-btns button {
+    width: 100%;
+  }
 
-      /* --- Бутон "нагоре" по-навътре, за да не пречи на палеца --- */
-      .scroll-top-btn {
-        bottom: 16px;
-        right: 16px;
-        width: 42px;
-        height: 42px;
-        font-size: 18px;
-      }
+  /* --- Бутон "нагоре" по-навътре, за да не пречи на палеца --- */
+  .scroll-top-btn {
+    bottom: 16px;
+    right: 16px;
+    width: 42px;
+    height: 42px;
+    font-size: 18px;
+  }
 
-      footer {
-        padding: 20px 14px 0;
-        font-size: 12px;
-      }
-    }
+  footer {
+    padding: 20px 14px 0;
+    font-size: 12px;
+  }
+}
 
-    /* Допълнителна прецизност за много малки екрани (телефони до ~380px) */
-    @media (max-width: 480px) {
+/* Допълнителна прецизност за много малки екрани (телефони до ~380px) */
+@media (max-width: 480px) {
 
-      .auth-corner-btn {
-        padding: 8px 14px;
-        font-size: 11px;
-      }
+  .auth-corner-btn {
+    padding: 8px 14px;
+    font-size: 11px;
+  }
 
-      h1.title {
-        font-size: 22px;
-      }
+  h1.title {
+    font-size: 22px;
+  }
 
-      .top-row-container {
-        grid-template-columns: 1fr;
-      }
+  .top-row-container {
+    grid-template-columns: 1fr;
+  }
 
-      .live-clock-box,
-      .player-card-inline {
-        flex-direction: row;
-      }
+  .live-clock-box,
+  .player-card-inline {
+    flex-direction: row;
+  }
 
-      .month-pill {
-        min-width: 0;
-        padding: 8px 0;
-        font-size: clamp(9px, 3vw, 12px);
-      }
+  .month-pill {
+    min-width: 0;
+    padding: 8px 0;
+    font-size: clamp(9px, 3vw, 12px);
+  }
 
-      .week-nav-btns {
-        flex-direction: column;
-      }
+  .week-nav-btns {
+    flex-direction: column;
+  }
 
-      .week-nav-btns button {
-        width: 100%;
-      }
+  .week-nav-btns button {
+    width: 100%;
+  }
 
-      .day-quick-add select,
-      .day-quick-add input {
-        font-size: 12px;
-      }
+  .day-quick-add select,
+  .day-quick-add input {
+    font-size: 12px;
+  }
 
-      .notebook-cover-icon {
-        font-size: 32px;
-      }
+  .notebook-cover-icon {
+    font-size: 32px;
+  }
 
-      .notebook-cover-title {
-        font-size: 15px;
-      }
-    }
+  .notebook-cover-title {
+    font-size: 15px;
+  }
+}
 
-    /* ======================================================
+/* ======================================================
        ГОДИНИ над месеците (над първите 4 месеца)
        ====================================================== */
-    .years-quick-bar {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr); /* същата мрежа като при месеците */
-      gap: 6px;
-      margin-bottom: 6px;
-    }
+.years-quick-bar {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  /* същата мрежа като при месеците */
+  gap: 6px;
+  margin-bottom: 6px;
+}
 
-    @media (max-width: 1024px) {
-      .years-quick-bar { grid-template-columns: repeat(6, 1fr); }
-    }
+@media (max-width: 1024px) {
+  .years-quick-bar {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
 
-    @media (max-width: 600px) {
-      .years-quick-bar { grid-template-columns: repeat(4, 1fr); }
-    }
+@media (max-width: 768px) {
+  .years-quick-bar {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
 
-    .year-pill {
-      background: var(--primary-base);
-      border: 1px solid var(--primary-deep);
-      border-radius: 8px;
-      padding: 8px 4px;
-      text-align: center;
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--primary-text);
-      transition: all 0.2s ease;
-      white-space: nowrap;
-    }
+.year-pill {
+  background: var(--primary-base);
+  border: 1px solid var(--primary-deep);
+  border-radius: 8px;
+  padding: 8px 4px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary-text);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
 
-    .year-pill:hover {
-      background: var(--primary-deep);
-    }
+.year-pill:hover {
+  background: var(--primary-deep);
+}
 
-    .year-pill.active {
-      background: var(--primary-text);
-      color: #fff;
-      border-color: var(--primary-text);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    }
+.year-pill.active {
+  background: var(--primary-text);
+  color: #fff;
+  border-color: var(--primary-text);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
 
-    /* Бутоните "Промени темата" и "Изход": закрепени в горния десен ъгъл на страницата
+/* Бутоните "Промени темата" и "Изход": закрепени в горния десен ъгъл на страницата
        и НЕ ги следват при скрол (излизат заедно със страницата, не пречат на съдържанието) */
-    .theme-switcher-container {
-      position: absolute;
-      transform: none;
-    }
+.theme-switcher-container {
+  position: absolute;
+  transform: none;
+}
 
-    /* Бутоните преди вход (долу/горе в ъгъла) – фиксирани */
-    .theme-btn-corner,
-    .auth-corner-btn {
-      position: fixed;
-      transform: translateZ(0);          /* собствен слой – без "треперене" при скрол на iOS */
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
-    }
+/* Бутоните преди вход (долу/горе в ъгъла) – фиксирани */
+.theme-btn-corner,
+.auth-corner-btn {
+  position: fixed;
+  transform: translateZ(0);
+  /* собствен слой – без "треперене" при скрол на iOS */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
 
-    /* ======================================================
+/* ======================================================
        МОБИЛНО: навигация на 1 ред + акордеон за Пон–Пет
        (последен блок, за да има предимство пред по-горните правила)
        ====================================================== */
-    @media (max-width: 768px) {
+@media (max-width: 768px) {
 
-      .year-pill {
-        min-width: 0;
-        padding: 8px 0;
-        font-size: clamp(10px, 3.2vw, 13px);
-      }
+  .year-pill {
+    min-width: 0;
+    padding: 8px 0;
+    font-size: clamp(10px, 3.2vw, 13px);
+  }
 
-      /* Бутоните "Предишна / Текуща седмица / Следваща" – на 1 ред */
-      .week-nav-btns {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        gap: 6px;
-        width: 100%;
-      }
+  /* Бутоните "Предишна / Текуща седмица / Следваща" – на 1 ред */
+  .week-nav-btns {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 6px;
+    width: 100%;
+  }
 
-      .week-nav-btns button {
-        flex: 1 1 0;
-        width: auto;
-        min-width: 0;
-        padding: 9px 4px;
-        font-size: clamp(10px, 3.2vw, 12.5px);
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
+  .week-nav-btns button {
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
+    padding: 9px 4px;
+    font-size: clamp(10px, 3.2vw, 12.5px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
-      /* Акордеон: заглавната част е бутон */
-      .day-column.accordion-day {
-        scroll-margin-top: 10px; /* малко въздух над заглавието при скрол */
-      }
+  /* Акордеон: заглавната част е бутон */
+  .day-column.accordion-day {
+    scroll-margin-top: 10px;
+    /* малко въздух над заглавието при скрол */
+  }
 
-      .day-column.accordion-day .day-header {
-        position: relative;
-        cursor: pointer;
-        padding-right: 26px;
-        padding-left: 26px;
-        -webkit-tap-highlight-color: transparent;
-      }
+  .day-column.accordion-day .day-header {
+    position: relative;
+    cursor: pointer;
+    padding-right: 26px;
+    padding-left: 26px;
+    -webkit-tap-highlight-color: transparent;
+  }
 
-      .day-column.accordion-day .day-header::after {
-        content: '';
-        position: absolute;
-        right: 8px;
-        top: 12px;
-        width: 8px;
-        height: 8px;
-        border-right: 2px solid var(--primary-text);
-        border-bottom: 2px solid var(--primary-text);
-        transform: rotate(45deg);
-        transition: transform 0.2s ease;
-      }
+  .day-column.accordion-day .day-header::after {
+    content: '';
+    position: absolute;
+    right: 8px;
+    top: 12px;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid var(--primary-text);
+    border-bottom: 2px solid var(--primary-text);
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+  }
 
-      .day-column.accordion-day.open .day-header::after {
-        transform: rotate(-135deg);
-        top: 16px;
-      }
+  .day-column.accordion-day.open .day-header::after {
+    transform: rotate(-135deg);
+    top: 16px;
+  }
 
-      /* Затворен ден: скриваме съдържанието и махаме излишните отстъпи */
-      .day-column.accordion-day:not(.open) .time-slots-list,
-      .day-column.accordion-day:not(.open) .day-quick-add {
-        display: none;
-      }
+  /* Затворен ден: скриваме съдържанието и махаме излишните отстъпи */
+  .day-column.accordion-day:not(.open) .time-slots-list,
+  .day-column.accordion-day:not(.open) .day-quick-add {
+    display: none;
+  }
 
-      .day-column.accordion-day:not(.open) .day-header {
-        border-bottom: none;
-        margin-bottom: 0;
-        padding-bottom: 0;
-      }
-    }
+  .day-column.accordion-day:not(.open) .day-header {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+}
 
-    /* ======================================================
-       Микро-анимация на заглавието: при посочване с мишката
-       леко се повдига и се връща на мястото си
-       ====================================================== */
-    h1.title {
-      width: fit-content;          /* реагира само върху самия текст, не върху целия ред */
-      margin-left: auto;
-      margin-right: auto;
-      cursor: default;
-    }
+/* ======================================================
+   Микро-анимация на заглавието: при посочване с мишката
+   леко се плъзга надясно и се връща плавно
+   ====================================================== */
+h1.title {
+  width: fit-content;          /* реагира само върху самия текст, не върху целия ред */
+  margin-left: auto;
+  margin-right: auto;
+  cursor: default;
+  transition: transform 0.35s ease;
+}
 
-    @keyframes titleHoverBounce {
-      0%   { transform: translateY(0); }
-      35%  { transform: translateY(-7px) scale(1.02); }
-      70%  { transform: translateY(1px); }
-      100% { transform: translateY(0); }
-    }
+h1.title:hover {
+  transform: translateX(14px);
+}
 
-    @media (hover: hover) {
-      h1.title:hover {
-        animation: titleHoverBounce 0.6s ease-in-out;
-      }
-    }
+@media (prefers-reduced-motion: reduce) {
+  h1.title {
+    transition: none;
+  }
+  h1.title:hover {
+    transform: none;
+  }
+}
 
-    @media (prefers-reduced-motion: reduce) {
-      h1.title:hover {
-        animation: none;
-      }
-    }
+/* ======================================================
+   Подсветка и hover ефект за горните и долните карти
+   (Мисъл, Дата/Час, Радио, Бързи бележки, Линкове, Тефтерче)
+   ====================================================== */
+.daily-quote-box,
+.live-clock-box,
+.player-card-inline,
+.notes-card {
+  transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+
+.daily-quote-box:hover,
+.live-clock-box:hover,
+.player-card-inline:hover,
+.notes-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--primary-deep);
+  box-shadow: 0 0 24px 4px var(--primary-deep), var(--shadow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .daily-quote-box:hover,
+  .live-clock-box:hover,
+  .player-card-inline:hover,
+  .notes-card:hover {
+    transform: none;
+  }
+}
+/* Премахва контура при фокус на бутона "Промени темата" */
+.theme-btn:focus,
+.theme-btn:focus-visible {
+  outline: none;
+}
+
+/* ======================================================
+   Версия за печат
+   ====================================================== */
+@media print {
+  /* Скрий всичко, което не е нужно на хартия */
+  .page-bg,
+  .corner-planning-quote,
+  .auth-corner-btn,
+  .theme-btn-corner,
+  .theme-switcher-container,
+  .daily-quote-box,
+  .live-clock-box,
+  .player-card-inline,
+  .top-row-container,
+  .years-quick-bar,
+  .months-quick-bar,
+  .week-nav-btns button,
+  .planner-top-bar .week-nav-btns,
+  #notes,
+  .scroll-top-btn,
+  .custom-modal-overlay,
+  footer,
+  .day-quick-add,
+  .add-inline-btn,
+  input[type="checkbox"],
+  .divider,
+  .print-btn-row {
+    display: none !important;
+  }
+
+  header.hero {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  h1.title {
+    font-size: 22px;
+    text-shadow: none;
+    margin: 0 0 6px !important;
+  }
+
+  .planner-title-range {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .wrap {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  section#planner {
+    margin: 0 !important;
+  }
+
+  .planner-top-bar {
+    margin-bottom: 8px !important;
+    padding-bottom: 8px !important;
+  }
+
+  .card {
+    box-shadow: none;
+    background: #fff;
+    padding: 0;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+
+  .calendar-weekdays-grid,
+  .calendar-weekend-grid {
+    display: grid !important;
+  }
+
+  .calendar-weekdays-grid {
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 8px !important;
+  }
+
+  .calendar-weekend-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+  }
+
+  /* Пази само отделния ден цял - никога цялата редица */
+  .day-column {
+    box-shadow: none !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    font-size: 10px;
+    padding: 6px;
+  }
+
+  .day-name {
+    font-size: 12px;
+  }
+
+  .time-slot-row {
+    padding: 2px 0;
+    min-height: auto;
+  }
+
+  .day-column.accordion-day .day-header {
+    cursor: default !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    border-bottom: 2px solid var(--border-color) !important;
+    margin-bottom: 8px !important;
+    padding-bottom: 6px !important;
+  }
+
+  .day-column.accordion-day .day-header::after {
+    display: none !important;
+  }
+
+  .day-column.accordion-day .time-slots-list,
+  .day-column.accordion-day:not(.open) .time-slots-list {
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+}
+    /* Принудително слепи заглавната лента с първата редица дни */
+  .card > *:first-child {
+    break-before: avoid !important;
+    page-break-before: avoid !important;
+  }
+
+  .planner-top-bar,
+  .calendar-weekdays-grid {
+    break-before: avoid !important;
+    page-break-before: avoid !important;
+  }
