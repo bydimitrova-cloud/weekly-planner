@@ -323,7 +323,7 @@ body:has(#authOverlay:not(.hidden)) .corner-planning-quote {
   opacity: 1;
 }
 
-/* Скрива съдържанието на приложението, докато не е потвърдена сесията / не е логнат[cite: 2] */
+/* Скрива съдържанието на приложението, докато не е потвърдена сесията / не е логнат */
 body.pre-auth header.hero,
 body.pre-auth .wrap,
 body.pre-auth footer,
@@ -2084,8 +2084,7 @@ h1.title:hover {
   .day-quick-add,
   .add-inline-btn,
   input[type="checkbox"],
-  .divider,
-  .print-btn-row {
+  .divider {
     display: none !important;
   }
 
@@ -2188,8 +2187,8 @@ h1.title:hover {
     max-height: none !important;
     overflow: visible !important;
   }
-}
-    /* Принудително слепи заглавната лента с първата редица дни */
+
+  /* Принудително слепи заглавната лента с първата редица дни */
   .card > *:first-child {
     break-before: avoid !important;
     page-break-before: avoid !important;
@@ -2200,3 +2199,4 @@ h1.title:hover {
     break-before: avoid !important;
     page-break-before: avoid !important;
   }
+}
