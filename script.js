@@ -23,24 +23,34 @@ function toggleTheme() {
   setTheme(savedTheme);
 })();
 
-// Цитати
-const POSITIVE_QUOTES = [
+// Цитати: зареждат се от отделен файл; тези 2 са резервни, ако файлът не се зареди
+const FALLBACK_QUOTES = [
   { text: "Всяка сутрин имаме ново начало. Това, което правим днес, има най-голямо значение.", author: "Буда" },
-  { text: "Успехът не е ключът към щастието. Щастието е ключът към успеха.", author: "Алберт Швайцер" },
-  { text: "Малките стъпки всеки ден водят до големи промени във времето.", author: "Мъдрост за деня" },
-  { text: "Позволи си да растеш със собствено темпо. Няма нужда да бързаш.", author: "Вдъхновяваща мисъл" }
+  { text: "Малките стъпки всеки ден водят до големи промени във времето.", author: "Мъдрост за деня" }
 ];
 
-function initDailyQuote() {
+function showQuote(list) {
   const quoteText = document.getElementById('quoteText');
   const quoteAuthor = document.getElementById('quoteAuthor');
   const now = new Date();
-  const start = new Date(now.getFullYear(), 0, 0);
-  const diff = (now - start) + ((start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
-  const dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24));
-  let idx = dayOfYear % POSITIVE_QUOTES.length;
-  quoteText.textContent = `„${POSITIVE_QUOTES[idx].text}“`;
-  quoteAuthor.textContent = `- ${POSITIVE_QUOTES[idx].author}`;
+  // Брой изминали дни (по местно време): всеки ден е следваща мисъл
+  const dayNumber = Math.floor((now.getTime() - now.getTimezoneOffset() * 60000) / 86400000);
+  const q = list[dayNumber % list.length];
+  quoteText.textContent = `„${q.text}“`;
+  quoteAuthor.textContent = `- ${q.author}`;
+}
+
+async function initDailyQuote() {
+  try {
+    const res = await fetch('quotes.json');
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const list = await res.json();
+    if (!Array.isArray(list) || list.length === 0) throw new Error('Празен списък');
+    showQuote(list);
+  } catch (e) {
+    console.warn('Не успях да заредя quotes.json, ползвам резервните мисли.', e);
+    showQuote(FALLBACK_QUOTES);
+  }
 }
 initDailyQuote();
 
@@ -207,7 +217,7 @@ async function doLogin() {
   authNote.textContent = '';
   const email = authEmail.value.trim();
   const password = authPassword.value;
-  if (!email || !password) { authError.textContent = 'Попълни имейл и парола.'; return; }
+  if (!email || !password) { authError.textContent = 'Попълнете имейл и парола.'; return; }
   const { error } = await sb.auth.signInWithPassword({ email, password });
   if (error) {
     if (error.message === 'Invalid login credentials') {
@@ -273,7 +283,7 @@ document.getElementById('signupSubmitBtn').addEventListener('click', async () =>
   const email = signupEmail.value.trim();
   const password = signupPassword.value;
   if (!email || !password || password.length < 6) {
-    signupError.textContent = 'Имейл и парола (мин. 6 символа) са задължителни.';
+    signupError.textContent = 'Попълнете имейл и парола. Паролата трябва да съдържа минимум 6 символа.';
     return;
   }
   const { error } = await sb.auth.signUp({
@@ -281,8 +291,17 @@ document.getElementById('signupSubmitBtn').addEventListener('click', async () =>
     password,
     options: { emailRedirectTo: 'https://bydimitrova-cloud.github.io/weekly-planner/' }
   });
-  if (error) { signupError.textContent = 'Грешка: ' + error.message; return; }
-  signupNote.textContent = 'Готово! Провери имейла си за линк за потвърждение, после влез с бутона "Вход".';
+  if (error) {
+    const msg = error.message.toLowerCase();
+    if (msg.includes('unable to validate email address') ||
+      msg.includes('invalid format')) {
+      signupError.textContent = 'Невалиден имейл.';
+    } else {
+      signupError.textContent = 'Грешка: ' + error.message;
+    }
+    return;
+  }
+  signupNote.textContent = 'Готово! Проверете имейла си за линк за потвърждение и след това влезте с бутона "Вход".';
 });
 
 // Забравена парола -> изпращане на линк за възстановяване
@@ -291,11 +310,19 @@ document.getElementById('forgotPasswordLink').addEventListener('click', async (e
   authError.textContent = '';
   authNote.textContent = '';
   const email = authEmail.value.trim();
-  if (!email) { authError.textContent = 'Въведи първо имейла си, за да изпратим линк за възстановяване.'; return; }
+  if (!email) { authError.textContent = 'Въведете имейла си, за да ви изпратим линк за възстановяване на паролата.'; return; }
   const { error } = await sb.auth.resetPasswordForEmail(email, {
     redirectTo: 'https://bydimitrova-cloud.github.io/weekly-planner/'
   });
-  if (error) { authError.textContent = 'Грешка: ' + error.message; return; }
+  if (error) {
+    if (error.message.toLowerCase().includes('unable to validate email address') ||
+      error.message.toLowerCase().includes('invalid format')) {
+      authError.textContent = 'Невалиден имейл.';
+    } else {
+      authError.textContent = 'Грешка: ' + error.message;
+    }
+    return;
+  }
   authNote.textContent = 'Изпратихме линк за смяна на паролата на ' + email + '.';
 });
 
@@ -348,7 +375,7 @@ async function submitNewPassword() {
   }
   const { error } = await sb.auth.updateUser({ password: newPass });
   if (error) { recoveryError.textContent = 'Грешка: ' + error.message; return; }
-  recoveryNote.textContent = 'Паролата е сменена успешно! Влизаш автоматично...';
+  recoveryNote.textContent = 'Паролата е сменена успешно!';
   setTimeout(() => location.reload(), 1200);
 }
 
