@@ -2208,3 +2208,19 @@ h1.title:hover {
     page-break-before: avoid !important;
   }
 }
+.auth-switch-row {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  text-align: center;
+  margin: 12px 0 4px;
+}
+
+.auth-switch-row a {
+  color: var(--primary-text);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-switch-row a:hover {
+  text-decoration: underline;
+}

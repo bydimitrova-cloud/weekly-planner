@@ -52,8 +52,26 @@
       <div class="auth-error" id="authError"></div>
       <div class="auth-note" id="authNote"></div>
       <button class="auth-btn-primary" id="authLoginBtn">Вход</button>
-      <button class="auth-btn-secondary" id="authSignupBtn">Регистрация</button>
+      <p class="auth-switch-row" id="switchToSignupRow">Нямате регистрация? <a href="#"
+          id="switchToSignupLink">Регистрирайте се тук.</a></p>
       <button class="auth-btn-back" id="authBackBtn">‹ Назад</button>
+    </div>
+
+    <!-- Отделна форма само за регистрация -->
+    <div class="auth-box auth-form-box hidden" id="signupFormBox">
+      <h2>Регистрация</h2>
+      <p class="auth-subtitle">Създай своя акаунт, за да пазиш планера си в облака.</p>
+      <input type="email" id="signupEmail" placeholder="Имейл" autocomplete="email">
+      <div class="password-field-wrap">
+        <input type="password" id="signupPassword" placeholder="Парола (мин. 6 символа)" autocomplete="new-password">
+        <button type="button" class="password-eye-btn" id="signupEyeBtn" title="Покажи/скрий паролата"
+          aria-label="Покажи/скрий паролата"></button>
+      </div>
+      <div class="auth-error" id="signupError"></div>
+      <div class="auth-note" id="signupNote"></div>
+      <button class="auth-btn-primary" id="signupSubmitBtn">Регистрация</button>
+      <p class="auth-switch-row">Вече имате акаунт? <a href="#" id="switchToLoginLink">Влезте тук.</a></p>
+      <button class="auth-btn-back" id="signupBackBtn">‹ Назад</button>
     </div>
 
     <!-- Екран за задаване на нова парола (след клик на линк "Забравена парола") -->
