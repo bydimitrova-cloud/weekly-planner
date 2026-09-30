@@ -265,7 +265,7 @@ body:has(#authOverlay:not(.hidden)) .intro-hero {
 
   /* Дървото да е по-надясно (като на желаната снимка) */
   .intro-hero-video video {
-    object-position: 75% bottom;
+    object-position: 80% center;
   }
 }
 
