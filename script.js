@@ -17,10 +17,9 @@ function toggleTheme() {
   }
 }
 
-// Зареждане на запазената тема
+// Винаги започва със Сакура
 (function () {
-  const savedTheme = localStorage.getItem('bday_planner_theme') || 'sakura';
-  setTheme(savedTheme);
+  setTheme('sakura');
 })();
 
 // Цитати: зареждат се от отделен файл; тези 2 са резервни, ако файлът не се зареди
