@@ -248,8 +248,8 @@ body:has(#authOverlay:not(.hidden)) .intro-hero {
 /* Мобилно */
 @media (max-width: 768px) {
   .intro-hero-inner {
-    padding: 0 40px;
-    padding-top: 600px;
+    padding: 0 30px;
+    padding-top: 52svh;
   }
 
   .intro-line {
