@@ -27,8 +27,13 @@ body.pre-auth .page-bg {
 }
 
 @keyframes videoFadeIn {
-  from { opacity: 0; }
-  to   { opacity: 0.92; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 0.92;
+  }
 }
 
 /* Слоевете над видеото */
@@ -54,7 +59,8 @@ body.pre-auth .page-bg {
 .intro-hero {
   position: fixed;
   inset: 0;
-  z-index: 1400; /* под бутона "Вход за потребители" (1500) */
+  z-index: 1400;
+  /* под бутона "Вход за потребители" (1500) */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -75,7 +81,8 @@ body.pre-auth .page-bg {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center right; /* дървото е в дясната част */
+  object-position: center right;
+  /* дървото е в дясната част */
   opacity: 0.9;
 }
 
@@ -198,17 +205,33 @@ body.pre-auth .page-bg {
 
 /* Появяване при зареждане */
 @keyframes introFadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .intro-fade {
   animation: introFadeUp 0.9s ease both;
 }
 
-.intro-eyebrow.intro-fade { animation-duration: 0.7s; }
-.intro-title.intro-fade   { animation-duration: 1s; animation-delay: 0.1s; }
-.intro-quote.intro-fade   { animation-delay: 0.5s; }
+.intro-eyebrow.intro-fade {
+  animation-duration: 0.7s;
+}
+
+.intro-title.intro-fade {
+  animation-duration: 1s;
+  animation-delay: 0.1s;
+}
+
+.intro-quote.intro-fade {
+  animation-delay: 0.5s;
+}
 
 /* Скрива се след вход и докато е отворена формата за вход */
 body:not(.pre-auth) .intro-hero,
@@ -223,16 +246,31 @@ body:has(#authOverlay:not(.hidden)) .intro-hero {
 
 /* Мобилно */
 @media (max-width: 768px) {
-  .intro-hero-inner { padding: 0 20px; }
-  .intro-line { white-space: normal; }
-  .intro-quote { bottom: 28px; padding: 0 20px; }
-  .intro-quote p { font-size: 19px; }
+  .intro-hero-inner {
+    padding: 0 20px;
+  }
+
+  .intro-line {
+    white-space: normal;
+  }
+
+  .intro-quote {
+    bottom: 28px;
+    padding: 0 20px;
+  }
+
+  .intro-quote p {
+    font-size: 19px;
+  }
+
   /* Дървото да е по-надясно (като на желаната снимка) */
   .intro-hero-video video {
-    object-position: 35% center; /* пробвай 30% / 35% / 40% */
+    object-position: 75% bottom;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .intro-fade { animation: none; }
+  .intro-fade {
+    animation: none;
+  }
 }
