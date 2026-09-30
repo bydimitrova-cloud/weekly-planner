@@ -227,6 +227,10 @@ body:has(#authOverlay:not(.hidden)) .intro-hero {
   .intro-line { white-space: normal; }
   .intro-quote { bottom: 28px; padding: 0 20px; }
   .intro-quote p { font-size: 19px; }
+  /* Дървото да е по-надясно (като на желаната снимка) */
+  .intro-hero-video video {
+    object-position: 35% center; /* пробвай 30% / 35% / 40% */
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
