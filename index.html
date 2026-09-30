@@ -13,6 +13,7 @@
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Poppins:wght@300;400;500;600&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="hero.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
@@ -20,9 +21,23 @@
 
   <div class="page-bg" aria-hidden="true"></div>
 
-  <!-- Вдъхновяващ текст в долния ляв ъгъл на началната страница -->
-  <div class="corner-planning-quote">
-    „Пътят от хиляди мили започва с една единствена крачка.“
+  <!-- Начална страница с анимирано заглавие -->
+  <div class="intro-hero" id="introHero">
+    <!-- Видео с анимираното дърво -->
+    <div class="intro-hero-video" aria-hidden="true">
+      <video autoplay muted loop playsinline preload="auto">
+        <source src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/bg-hero-0BnFGdr81Ifnj3WbBZoNt1KE4D5DMT.mp4"
+          type="video/mp4">
+      </video>
+    </div>
+
+    <div class="intro-hero-inner">
+      <div class="intro-eyebrow intro-fade">Личен седмичен планер</div>
+      <h1 class="intro-title intro-fade">
+        <span class="intro-line">Време за теб,</span>
+        <span class="intro-line">дни, които <span class="intro-word" id="introWord"></span></span>
+      </h1>
+    </div>
 
   </div>
 
@@ -258,6 +273,7 @@
     window.SUPABASE_KEY = 'sb_publishable_9gcXRxv6T8Wd1R5SwCm0BQ_VX8T6ZBo';
   </script>
   <script src="script.js"></script>
+  <script src="hero.js"></script>
 </body>
 
 </html>
