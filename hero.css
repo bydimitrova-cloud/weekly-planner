@@ -229,7 +229,7 @@ body:has(#authOverlay:not(.hidden)) .intro-hero {
   .intro-quote p { font-size: 19px; }
   /* Дървото да е по-надясно (като на желаната снимка) */
   .intro-hero-video video {
-    object-position: 50% center; /* пробвай 30% / 35% / 40% */
+    object-position: 35% center; /* пробвай 30% / 35% / 40% */
   }
 }
 
