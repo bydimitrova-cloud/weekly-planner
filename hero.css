@@ -249,7 +249,7 @@ body:has(#authOverlay:not(.hidden)) .intro-hero {
 @media (max-width: 768px) {
   .intro-hero-inner {
     padding: 0 20px;
-    padding-top: 60px;
+    padding-top: 100px;
   }
 
   .intro-line {
