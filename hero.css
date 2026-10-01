@@ -3,12 +3,6 @@
    Слага се СЛЕД style.css в index.html
    ====================================================== */
 
-/* Скриваме стария page-bg фон на началната страница */
-body.pre-auth .page-bg {
-  opacity: 0 !important;
-  visibility: hidden !important;
-}
-
 .intro-hero {
   position: fixed;
   inset: 0;
@@ -20,8 +14,8 @@ body.pre-auth .page-bg {
   overflow: hidden;
   color: #fff;
   font-family: 'Playfair Display', Georgia, serif;
-  /* напълно черен, докато видеото зареди */
   background: #000 !important;
+  /* напълно черен, докато видеото зареди */
 }
 
 /* Видео фон с дървото */
@@ -53,7 +47,7 @@ body.pre-auth .page-bg {
   }
 }
 
-/* Затъмняване, за да се чете бялият текст върху снимката */
+/* Затъмняване, за да се чете бялият текст върху видеото */
 .intro-hero::before {
   content: "";
   position: absolute;
@@ -65,27 +59,13 @@ body.pre-auth .page-bg {
     linear-gradient(to bottom, rgba(0, 0, 0, 0.18) 0%, transparent 40%, rgba(0, 0, 0, 0.55) 100%);
 }
 
-/* Тънка мрежа от линии */
-.intro-hero-grid {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  opacity: 0.5;
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.12) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
-  background-size: 8.333% 12.5%;
-}
-
 .intro-hero-inner {
   position: relative;
   z-index: 2;
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 48px;
-  padding-top: 140px;
+  padding: 140px 48px 0;
 }
 
 .intro-eyebrow {
@@ -125,38 +105,12 @@ body.pre-auth .page-bg {
 
 .intro-word {
   display: inline-block;
-  position: relative;
 }
 
 /* Всяка буква от сменящата се дума */
 .intro-letter {
   display: inline-block;
   transition: color 0.4s ease;
-}
-
-/* Мисълта долу вляво */
-.intro-quote {
-  position: absolute;
-  z-index: 2;
-  left: 0;
-  right: 0;
-  bottom: 40px;
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 48px;
-  box-sizing: border-box;
-}
-
-.intro-quote p {
-  margin: 0;
-  max-width: 640px;
-  font-size: clamp(20px, 2.4vw, 32px);
-  font-style: italic;
-  font-weight: 500;
-  line-height: 1.35;
-  color: rgba(255, 255, 255, 0.92);
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7), 0 0 24px rgba(0, 0, 0, 0.5);
 }
 
 /* Появяване при зареждане */
@@ -185,10 +139,6 @@ body.pre-auth .page-bg {
   animation-delay: 0.1s;
 }
 
-.intro-quote.intro-fade {
-  animation-delay: 0.5s;
-}
-
 /* Скрива се след вход и докато е отворена формата за вход */
 body:not(.pre-auth) .intro-hero,
 body:has(#authOverlay:not(.hidden)) .intro-hero {
@@ -203,24 +153,19 @@ body:has(#authOverlay:not(.hidden)) .intro-hero {
 /* Мобилно */
 @media (max-width: 768px) {
   .intro-hero-inner {
-    padding: 0 20px;
-    padding-top: 60svh;
+    padding: 60svh 20px 0;
+  }
+
+  .intro-title {
+    line-height: 1.3;
+    /* повече разстояние между двата реда */
   }
 
   .intro-line {
     white-space: normal;
   }
 
-  .intro-quote {
-    bottom: 28px;
-    padding: 0 20px;
-  }
-
-  .intro-quote p {
-    font-size: 19px;
-  }
-
-  /* Дървото да е по-надясно (като на желаната снимка) */
+  /* Дървото да е по-надясно */
   .intro-hero-video video {
     object-position: 80% 10%;
   }
