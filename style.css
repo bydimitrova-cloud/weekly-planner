@@ -1,7 +1,7 @@
 /* === ТЕМИ (SAKURA & SEA) === */
 :root[data-theme="sakura"] {
   --em-title-color: #e77f97;
-  --bg-image-url: url("https://wallpapershome.com/images/pages/pic_h/25872.jpg");
+  --bg-image-url: url("images/thema-sakura.webp");
   --bg-overlay-opacity: 0.18;
 
   --primary-base: #f7dbe0;
@@ -27,7 +27,7 @@
 
 :root[data-theme="sea"] {
   --em-title-color: #0284c7;
-  --bg-image-url: url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=80");
+  --bg-image-url: url("images/thema-sea.webp");
   --bg-overlay-opacity: 0.12;
 
   --primary-base: #e0f2fe;
