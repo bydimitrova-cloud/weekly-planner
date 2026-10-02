@@ -8,18 +8,37 @@ function setTheme(themeName) {
   }
 }
 
-function toggleTheme() {
-  const current = document.documentElement.getAttribute('data-theme');
-  if (current === 'sakura') {
-    setTheme('sea');
-  } else {
-    setTheme('sakura');
+// Тема превключване
+const THEMES = ['sakura', 'sea', 'fengshui', 'starry'];
+
+const THEME_ICONS = {
+  sakura: '🌸 Сакура',
+  sea: '🐬 Морe',
+  fengshui: '🌿 Фън шуй',
+  starry: '✨ Звездна нощ'
+};
+
+function setTheme(themeName) {
+  document.documentElement.setAttribute('data-theme', themeName);
+  localStorage.setItem('bday_planner_theme', themeName);
+
+  const btn = document.getElementById('themeSwitcherBtn');
+  if (btn) {
+    btn.textContent = THEME_ICONS[themeName] || 'Промени темата';
   }
 }
 
-// Винаги започва със Сакура
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') || 'sakura';
+  const currentIndex = THEMES.indexOf(current);
+  const nextIndex = (currentIndex + 1) % THEMES.length;
+  setTheme(THEMES[nextIndex]);
+}
+
+// Зарежда запазената тема (или започва със Сакура)
 (function () {
-  setTheme('sakura');
+  const saved = localStorage.getItem('bday_planner_theme');
+  setTheme(THEMES.includes(saved) ? saved : 'sakura');
 })();
 
 // Цитати: зареждат се от отделен файл; тези 2 са резервни, ако файлът не се зареди
