@@ -34,7 +34,7 @@
   --bg-overlay-opacity: 0.18;
 
   --primary-base: #f7dbe0;
-  --primary-deep: #d87e93;
+  --primary-deep: #ddb8c0;
   --primary-text: #8a4a5c;
   --accent-color: #f4c6d4;
   --card-bg: #fffaf5;
@@ -49,8 +49,8 @@
   --secondary-box-bg: #fff8f2;
   --notes-bg: #f3e9dd;
 
-  --footer-text: #eb8da3;
-  --footer-heart: #eb8da3;
+  --footer-text: #ffffff;
+  --footer-heart: #ffffff;
 
   --radius-lg: 22px;
   --radius-md: 14px;
@@ -63,7 +63,7 @@
   --bg-overlay-opacity: 0.12;
 
   --primary-base: #e0f2fe;
-  --primary-deep: #7dd3fc;
+  --primary-deep: #b8e7fd;
   --primary-text: #0284c7;
   --accent-color: #38bdf8;
   --card-bg: rgba(255, 255, 255, 0.94);
@@ -107,8 +107,8 @@
   --secondary-box-bg: #f5f7f3;
   --notes-bg: #f8f5e9;
 
-  --footer-text: #011605;
-  --footer-heart: #011605;
+  --footer-text: #ffffff;
+  --footer-heart: #ffffff;
 
   --radius-lg: 22px;
   --radius-md: 14px;
@@ -124,7 +124,7 @@
   --bg-overlay-opacity: 0.15;
 
   --primary-base: #090d16;
-  --primary-deep: #111827;
+  --primary-deep: #29385a;
   --primary-text: #f8fafc;
   --on-primary: #0b1020;              /* тъмен текст върху светли бутони */
   --accent-color: #60a5fa;
@@ -1810,8 +1810,9 @@ footer .heart {
     font-size: 16px;
   }
 
-  /* "Предишна / Текуща седмица / Следваща" – на 1 ред */
+ /* "Предишна / Текуща седмица / Следваща" – на 1 ред */
   .week-nav-btns {
+    display: flex; /* <-- ВАЖНО: гарантира flex контейнер */
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
@@ -1985,11 +1986,20 @@ footer .heart {
   }
 
   .week-nav-btns {
-    flex-direction: column;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 4px;
+    width: 100%;
   }
 
   .week-nav-btns button {
-    width: 100%;
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
+    padding: 8px 2px;
+    font-size: clamp(10px, 2.8vw, 12px);
   }
 
   .day-quick-add select,
