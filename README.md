@@ -36,3 +36,13 @@
 
 Отвори `index.html` в браузър — не изисква билд стъпка. Изисква интернет
 връзка, за да работи (данните живеят в Supabase, не само локално).
+
+## Медии и лицензи
+
+**Видео на началната страница**
+- Заглавие: "Spring, Cherry Blossom, Republic of Korea"
+- Автор: KIMDAEJEUNG
+- Източник: https://pixabay.com/videos/spring-cherry-blossom-103505/
+- Лиценз: Pixabay Content License (https://pixabay.com/service/license-summary/)
+- Свалено на: 2.10.2026 г.
+- Файлът е преоразмерен до 720p и компресиран.
