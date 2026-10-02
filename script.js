@@ -1,14 +1,4 @@
 // Тема превключване
-function setTheme(themeName) {
-  document.documentElement.setAttribute('data-theme', themeName);
-  localStorage.setItem('bday_planner_theme', themeName);
-  const btn = document.getElementById('themeSwitcherBtn');
-  if (btn) {
-    btn.textContent = themeName === 'sakura' ? '🐬 Промени темата' : '🌸 Промени темата';
-  }
-}
-
-// Тема превключване
 const THEMES = ['sakura', 'sea', 'fengshui', 'starry'];
 
 const THEME_ICONS = {
@@ -75,7 +65,6 @@ initDailyQuote();
 function updateLiveClock() {
   const now = new Date();
   let dateStr = now.toLocaleDateString('bg-BG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-  dateStr = dateStr.replace(/\bГ\.?$/i, 'г.');
   dateStr = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
   document.getElementById('liveDate').textContent = dateStr;
   document.getElementById('liveTime').textContent = now.toLocaleTimeString('bg-BG', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
@@ -188,7 +177,6 @@ function startApp() {
   document.body.classList.remove('pre-auth');
   document.getElementById('authOverlay').classList.add('hidden');
   document.getElementById('authGoToFormBtn').classList.add('hidden');
-  document.getElementById('themeSwitcherBtnPreauth').classList.add('hidden');
   notesArea.value = appData.notes || '';
   renderCalendar();
   renderReminders();
@@ -359,7 +347,6 @@ sb.auth.onAuthStateChange((event, session) => {
     authFormBox.classList.add('hidden');
     document.getElementById('recoveryFormBox').classList.remove('hidden');
     document.getElementById('authGoToFormBtn').classList.add('hidden');
-    document.getElementById('themeSwitcherBtnPreauth').classList.add('hidden');
   } else if (event === 'SIGNED_IN') {
     currentUser = session.user;
     loadFromCloud().then(startApp);

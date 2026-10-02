@@ -2,16 +2,19 @@
    ОБЩИ СТОЙНОСТИ ПО ПОДРАЗБИРАНЕ (темите ги презаписват при нужда)
    ====================================================== */
 :root {
-  --on-primary: #fff;                 /* текст върху бутони с фон var(--primary-text) */
+  --on-primary: #fff;
+  /* текст върху бутони с фон var(--primary-text) */
   --danger: #e63946;
   --cancel-bg: #e9ecef;
   --cancel-text: #333;
   --modal-bg: var(--card-inner-bg);
   --auth-overlay-bg: linear-gradient(160deg, var(--primary-base), var(--card-bg));
   --page-bg-color: transparent;
-  --overlay-tint: 255, 255, 255;      /* RGB на воала върху фоновата снимка */
+  --overlay-tint: 255, 255, 255;
+  /* RGB на воала върху фоновата снимка */
   --top-card-border: rgba(255, 255, 255, 0.9);
-  --off-bg: #eeeeee;                  /* неработен ден */
+  --off-bg: #eeeeee;
+  /* неработен ден */
   --off-border: #c9c9c9;
   --off-text: #6b6b6b;
   --hover-border: var(--primary-deep);
@@ -50,10 +53,8 @@
   --notes-bg: #f3e9dd;
 
   --footer-text: #ffffff;
-  --footer-heart: #ffffff;
 
   --radius-lg: 22px;
-  --radius-md: 14px;
   --shadow: 0 10px 30px rgba(140, 90, 100, 0.10);
 }
 
@@ -79,10 +80,8 @@
   --notes-bg: #fdfcdc;
 
   --footer-text: #0c4a6e;
-  --footer-heart: #0c4a6e;
 
   --radius-lg: 22px;
-  --radius-md: 14px;
   --shadow: 0 10px 30px rgba(0, 119, 182, 0.15);
 }
 
@@ -108,16 +107,15 @@
   --notes-bg: #f8f5e9;
 
   --footer-text: #ffffff;
-  --footer-heart: #ffffff;
 
   --radius-lg: 22px;
-  --radius-md: 14px;
   --shadow: 0 10px 30px rgba(60, 90, 70, 0.12);
 }
 
 /* === ЗВЕЗДНА НОЩ === */
 :root[data-theme="starry"] {
-  color-scheme: dark;                 /* тъмни скролбарове и падащи списъци */
+  color-scheme: dark;
+  /* тъмни скролбарове и падащи списъци */
 
   --em-title-color: #fde68a;
   --bg-image-url: url("images/theme-starry.webp");
@@ -126,7 +124,8 @@
   --primary-base: #090d16;
   --primary-deep: #29385a;
   --primary-text: #f8fafc;
-  --on-primary: #0b1020;              /* тъмен текст върху светли бутони */
+  --on-primary: #0b1020;
+  /* тъмен текст върху светли бутони */
   --accent-color: #60a5fa;
   --card-bg: rgba(9, 13, 22, 0.82);
   --card-inner-bg: rgba(17, 24, 39, 0.65);
@@ -141,17 +140,16 @@
   --notes-bg: rgba(15, 23, 42, 0.9);
 
   --footer-text: #cbd5e1;
-  --footer-heart: #cbd5e1;
 
   --radius-lg: 22px;
-  --radius-md: 14px;
   --shadow: 0 10px 35px rgba(0, 0, 0, 0.7);
 
   /* специфични за тъмната тема */
   --danger: #ff7a85;
   --cancel-bg: #334155;
   --cancel-text: #e2e8f0;
-  --modal-bg: #111827;                /* плътен, за да не прозира текстът отзад */
+  --modal-bg: #111827;
+  /* плътен, за да не прозира текстът отзад */
   --auth-overlay-bg: linear-gradient(160deg, #05070f, #0b1226);
   --page-bg-color: #05070f;
   --overlay-tint: 5, 8, 20;
@@ -423,12 +421,12 @@ body.pre-auth .scroll-top-btn {
   display: none !important;
 }
 
-/* Бутоните преди вход (горе/долу в ъгъла) – фиксирани */
-.theme-btn-corner,
+/* Бутон за вход преди влизане (горе вдясно) – фиксиран */
 .auth-corner-btn {
   position: fixed;
   z-index: 1500;
-  transform: translateZ(0);          /* собствен слой – без "треперене" на iOS */
+  transform: translateZ(0);
+  /* собствен слой – без "треперене" на iOS */
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
@@ -453,13 +451,7 @@ body.pre-auth .scroll-top-btn {
   transform: scale(1.05);
 }
 
-.theme-btn-corner {
-  bottom: 20px;
-  right: 20px;
-}
-
-.auth-corner-btn.hidden,
-.theme-btn-corner.hidden {
+.auth-corner-btn.hidden {
   display: none;
 }
 
@@ -520,7 +512,8 @@ h1.title {
   font-weight: 600;
   font-size: clamp(32px, 5vw, 48px);
   margin: 0 auto 50px;
-  width: fit-content;                /* реагира само върху самия текст */
+  width: fit-content;
+  /* реагира само върху самия текст */
   cursor: default;
   color: var(--main-title-color);
   text-shadow: var(--title-shadow);
@@ -720,7 +713,8 @@ section {
    ====================================================== */
 .years-quick-bar {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);   /* винаги в 1 ред */
+  grid-template-columns: repeat(4, 1fr);
+  /* винаги в 1 ред */
   gap: 6px;
   margin-bottom: 6px;
 }
@@ -1252,8 +1246,6 @@ section {
 }
 
 .notebook-cover-icon {
-  font-size: 38px;
-  line-height: 1;
   margin-bottom: 6px;
   filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.15));
 }
@@ -1576,15 +1568,6 @@ footer .footer-line {
   color: var(--footer-text);
 }
 
-footer .heart {
-  color: var(--footer-heart);
-  font-size: 26px;
-  font-weight: 700;
-  vertical-align: middle;
-  display: inline-block;
-  line-height: 1;
-}
-
 .scroll-top-btn {
   position: fixed;
   bottom: 24px;
@@ -1687,13 +1670,6 @@ footer .heart {
   }
 }
 
-@media (max-width: 600px) {
-  .calendar-weekdays-grid,
-  .calendar-weekend-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
 /* --- Мобилна версия --- */
 @media (max-width: 768px) {
 
@@ -1702,13 +1678,6 @@ footer .heart {
     top: 12px;
     right: 12px;
     padding: 9px 16px;
-    font-size: 12px;
-  }
-
-  .theme-btn-corner {
-    bottom: 12px;
-    right: 12px;
-    padding: 7px 14px;
     font-size: 12px;
   }
 
@@ -1781,7 +1750,8 @@ footer .heart {
   }
 
   .months-quick-bar {
-    grid-template-columns: repeat(4, 1fr);   /* 4 x 3 реда */
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 x 3 реда */
     overflow-x: visible;
     gap: 6px;
   }
@@ -1810,9 +1780,10 @@ footer .heart {
     font-size: 16px;
   }
 
- /* "Предишна / Текуща седмица / Следваща" – на 1 ред */
+  /* "Предишна / Текуща седмица / Следваща" – на 1 ред */
   .week-nav-btns {
-    display: flex; /* <-- ВАЖНО: гарантира flex контейнер */
+    display: flex;
+    /* <-- ВАЖНО: гарантира flex контейнер */
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
@@ -2007,10 +1978,6 @@ footer .heart {
     font-size: 12px;
   }
 
-  .notebook-cover-icon {
-    font-size: 32px;
-  }
-
   .notebook-cover-icon img {
     width: 52px;
     height: 52px;
@@ -2046,7 +2013,6 @@ footer .heart {
   .page-bg,
   .intro-hero,
   .auth-corner-btn,
-  .theme-btn-corner,
   .theme-switcher-container,
   .daily-quote-box,
   .live-clock-box,
