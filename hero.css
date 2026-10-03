@@ -163,6 +163,7 @@ body:has(#authOverlay:not(.hidden)) .intro-hero {
     /* по-малкото от ширината/височината, за да се побира във всяка ориентация */
     font-size: clamp(1.5rem, min(7.5vw, 9.5vh), 3rem);
     line-height: 1.25;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.75), 0 0 3px rgba(0, 0, 0, 0.5);
   }
 
   .intro-line {
