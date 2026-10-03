@@ -157,13 +157,15 @@ body:has(#authOverlay:not(.hidden)) .intro-hero {
   .intro-eyebrow {
     margin-bottom: clamp(10px, 3vh, 24px);
     font-size: 13px;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.7), 0 1px 8px rgba(0, 0, 0, 0.7);
   }
 
   .intro-title {
     /* по-малкото от ширината/височината, за да се побира във всяка ориентация */
     font-size: clamp(1.5rem, min(7.5vw, 9.5vh), 3rem);
     line-height: 1.25;
-    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.75), 0 0 3px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.6), 0 2px 10px rgba(0, 0, 0, 0.7), 0 0 26px rgba(0, 0, 0, 0.5);
   }
 
   .intro-line {
