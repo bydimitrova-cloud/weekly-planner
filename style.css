@@ -193,7 +193,7 @@ textarea::placeholder {
 body {
   margin: 0;
   position: relative;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   color: var(--ink);
   min-height: 100vh;
   line-height: 1.5;
@@ -612,6 +612,10 @@ h1.title em {
   color: var(--ink-soft);
   font-weight: 500;
   margin-bottom: 2px;
+}
+
+.clock-date-rest {
+  white-space: nowrap;
 }
 
 .clock-time {
@@ -1722,7 +1726,7 @@ footer .footer-line {
 
   /* Header */
   header.hero {
-    padding: 90px 12px 12px;
+    padding: 90px max(12px, env(safe-area-inset-right)) 12px max(12px, env(safe-area-inset-left));
   }
 
   h1.title {
@@ -1749,7 +1753,7 @@ footer .footer-line {
   }
 
   .wrap {
-    padding: 12px 6px 60px;
+    padding: 12px max(6px, env(safe-area-inset-right)) 60px max(6px, env(safe-area-inset-left));
   }
 
   .card {
@@ -1975,7 +1979,7 @@ footer .footer-line {
   }
 
   footer {
-    padding: 20px 14px 0;
+    padding: 20px max(14px, env(safe-area-inset-right)) 0 max(14px, env(safe-area-inset-left));
     font-size: 12px;
   }
 }
@@ -2023,12 +2027,14 @@ footer .footer-line {
   }
 }
 
-/* Сензорни екрани: 16px в полетата, за да не "набожда" iOS страницата */
-@media (pointer: coarse) {
+/* Само iPhone/iPad: 16px в полетата, за да не "набожда" страницата при докосване.
+   Падащият списък "Работен/Неработен ден" остава малък, защото рядко се ползва. */
+@supports (-webkit-touch-callout: none) {
+
   input[type="text"],
   input[type="email"],
   input[type="password"],
-  select,
+  .day-quick-add select,
   textarea {
     font-size: 16px !important;
   }

@@ -66,7 +66,17 @@ function updateLiveClock() {
   const now = new Date();
   let dateStr = now.toLocaleDateString('bg-BG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
   dateStr = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
-  document.getElementById('liveDate').textContent = dateStr;
+  const liveDateEl = document.getElementById('liveDate');
+  const commaIdx = dateStr.indexOf(',');
+  if (commaIdx > -1) {
+    // "Събота," + (разтеглива дата, която не се чупи): "3 октомври 2026 г."
+    const rest = document.createElement('span');
+    rest.className = 'clock-date-rest';
+    rest.textContent = dateStr.slice(commaIdx + 2);
+    liveDateEl.replaceChildren(document.createTextNode(dateStr.slice(0, commaIdx + 1) + ' '), rest);
+  } else {
+    liveDateEl.textContent = dateStr;
+  }
   document.getElementById('liveTime').textContent = now.toLocaleTimeString('bg-BG', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 }
 setInterval(updateLiveClock, 1000);
