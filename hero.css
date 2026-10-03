@@ -34,7 +34,6 @@
   object-fit: cover;
   object-position: 100% 10%;
   /* дървото е в дясната част */
-  opacity: 1;
 }
 
 @keyframes videoFadeIn {
@@ -172,7 +171,7 @@ body:has(#authOverlay:not(.hidden)) .intro-hero {
     white-space: normal;
   }
 
-  /* По-силно затъмняване отляво, където е текстът */
+  /* Леко затъмняване отляво, където е текстът */
   .intro-hero::before {
     background:
       linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.22) 70%, rgba(0, 0, 0, 0.08) 100%),
