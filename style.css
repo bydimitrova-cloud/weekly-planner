@@ -528,7 +528,7 @@ h1.title em {
   max-width: 1300px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
   align-items: stretch;
 }
@@ -830,14 +830,14 @@ section {
 
 .calendar-weekdays-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 12px;
   margin-bottom: 12px;
 }
 
 .calendar-weekend-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 
@@ -850,6 +850,8 @@ section {
   flex-direction: column;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
   transition: background 0.2s ease, border-color 0.2s ease;
+  min-width: 0;
+  /* важно за свиване в grid */
 }
 
 /* Неработни дни — денят си остава напълно активен за писане */
@@ -883,6 +885,8 @@ section {
 
 .day-type-select {
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   margin-top: 6px;
   border: 1px solid var(--border-color);
   border-radius: 6px;
@@ -892,6 +896,7 @@ section {
   color: var(--ink);
   outline: none;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 .time-slots-list {
@@ -1010,6 +1015,8 @@ section {
 .day-quick-add select,
 .day-quick-add input {
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   border: 1px solid var(--border-color);
   border-radius: 6px;
   padding: 4px 6px;
@@ -1017,6 +1024,7 @@ section {
   background: var(--card-inner-bg);
   color: var(--ink);
   outline: none;
+  box-sizing: border-box;
 }
 
 .day-quick-add button {
@@ -1121,7 +1129,7 @@ section {
    ====================================================== */
 .notes-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
   max-width: 1300px;
   margin: 0 auto;
@@ -1132,6 +1140,7 @@ section {
   height: 340px;
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .notes-card h3 {
@@ -1171,6 +1180,7 @@ section {
 .link-item {
   display: flex;
   align-items: center;
+  min-width: 0;
   gap: 8px;
   background: var(--notes-bg);
   border-radius: 8px;
@@ -1608,7 +1618,7 @@ footer .footer-line {
 /* ======================================================
    HOVER ЕФЕКТИ (само мишка, десктоп, без намалено движение)
    ====================================================== */
-@media (hover: hover) and (min-width: 769px) and (prefers-reduced-motion: no-preference) {
+@media (hover: hover) and (min-width: 835px) and (prefers-reduced-motion: no-preference) {
   h1.title {
     transition: transform 0.35s ease;
   }
@@ -1639,13 +1649,13 @@ footer .footer-line {
    ====================================================== */
 @media (max-width: 1100px) {
   .calendar-weekdays-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 1024px) {
   .top-row-container {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .months-quick-bar {
@@ -1655,13 +1665,17 @@ footer .footer-line {
 
 @media (max-width: 1000px) {
   .notes-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .notebook-card {
+    grid-column: 1 / -1;
   }
 }
 
 @media (max-width: 640px) {
   .notes-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .notes-card {
@@ -1670,8 +1684,9 @@ footer .footer-line {
   }
 }
 
-/* --- Мобилна версия --- */
-@media (max-width: 768px) {
+/* --- Мобилна версия (и телефон в пейзаж) --- */
+@media (max-width: 834px),
+(orientation: landscape) and (max-height: 520px) and (pointer: coarse) {
 
   /* Начален екран */
   .auth-corner-btn {
@@ -1734,11 +1749,11 @@ footer .footer-line {
   }
 
   .wrap {
-    padding: 12px 8px 60px;
+    padding: 12px 6px 60px;
   }
 
   .card {
-    padding: 14px;
+    padding: 12px;
     border-radius: 16px;
   }
 
@@ -1750,7 +1765,7 @@ footer .footer-line {
   }
 
   .months-quick-bar {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     /* 4 x 3 реда */
     overflow-x: visible;
     gap: 6px;
@@ -1772,12 +1787,16 @@ footer .footer-line {
 
   .planner-title-range {
     justify-content: center;
+    flex-wrap: nowrap;
+    gap: 6px;
     text-align: center;
-    font-size: 14px;
+    white-space: nowrap;
+    font-size: clamp(10px, 3.3vw, 14px);
   }
 
   .date-highlight {
-    font-size: 16px;
+    font-size: clamp(12px, 3.9vw, 16px);
+    padding: 2px 5px;
   }
 
   /* "Предишна / Текуща седмица / Следваща" – на 1 ред */
@@ -1804,11 +1823,23 @@ footer .footer-line {
 
   .calendar-weekdays-grid,
   .calendar-weekend-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .day-column {
+    min-width: 0;
+    width: 100%;
     padding: 12px;
+  }
+
+  /* Форм елементите да не излизат извън */
+  .day-type-select,
+  .day-quick-add select,
+  .day-quick-add input {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
   }
 
   /* Акордеон за дните Пон–Пет */
@@ -1861,6 +1892,10 @@ footer .footer-line {
 
   .section-head h2 {
     font-size: 24px;
+  }
+
+  .notes-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .notes-card {
@@ -1988,6 +2023,17 @@ footer .footer-line {
   }
 }
 
+/* Сензорни екрани: 16px в полетата, за да не "набожда" iOS страницата */
+@media (pointer: coarse) {
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
 /* ======================================================
    ВЕРСИЯ ЗА ПЕЧАТ
    ====================================================== */
@@ -2085,12 +2131,12 @@ footer .footer-line {
   }
 
   .calendar-weekdays-grid {
-    grid-template-columns: repeat(5, 1fr) !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
     gap: 8px !important;
   }
 
   .calendar-weekend-grid {
-    grid-template-columns: 1fr 1fr !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 8px !important;
   }
 
@@ -2101,6 +2147,7 @@ footer .footer-line {
     page-break-inside: avoid !important;
     font-size: 10px;
     padding: 6px;
+    min-width: 0;
   }
 
   .day-name {

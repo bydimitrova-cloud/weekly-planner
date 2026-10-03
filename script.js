@@ -465,7 +465,7 @@ window.setDayType = function (dateKey, type, selectEl) {
 }
 
 // ---------- Акордеон за дните Пон–Пет (само мобилна версия) ----------
-const ACCORDION_MQ = window.matchMedia('(max-width: 768px)');
+const ACCORDION_MQ = window.matchMedia('(max-width: 834px), (orientation: landscape) and (max-height: 520px) and (pointer: coarse)');
 let accordionWeekKey = null;   // за коя седмица е зададено състоянието
 let openDayKey = null;         // dateKey на разгънатия ден (null = всички затворени)
 
