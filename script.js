@@ -1,11 +1,12 @@
 // Тема превключване
-const THEMES = ['sakura', 'sea', 'fengshui', 'starry'];
+const THEMES = ['sakura', 'sea', 'fengshui', 'starry', 'domino'];
 
 const THEME_ICONS = {
   sakura: '🌸 Сакура',
   sea: '🐬 Морe',
   fengshui: '🌿 Фън шуй',
-  starry: '✨ Звездна нощ'
+  starry: '✨ Звездна нощ',
+  domino: '🎲 Домино'
 };
 
 function setTheme(themeName) {

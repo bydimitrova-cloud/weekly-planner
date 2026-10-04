@@ -166,6 +166,56 @@
   --h2-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
 }
 
+/* === ДОМИНО === */
+:root[data-theme="domino"] {
+  color-scheme: dark;
+
+  --em-title-color: #c9ced6;
+  --bg-image-url: url("images/theme-domino.webp");
+  --bg-overlay-opacity: 0.3;
+
+  --primary-base: #0d0e11;
+  --primary-deep: #3a3d44;
+  --primary-text: #e8eaee;
+  --on-primary: #0a0a0c;
+  --accent-color: #b8bec9;
+  --card-bg: rgba(12, 13, 16, 0.84);
+  --card-inner-bg: rgba(24, 25, 29, 0.7);
+  --border-color: rgba(200, 205, 215, 0.2);
+  --deep-heading: #e5e7eb;
+  --main-title-color: #ffffff;
+
+  --ink: #eceef2;
+  --ink-soft: #9aa0ab;
+  --gold: #d6dae1;
+  --secondary-box-bg: rgba(32, 33, 38, 0.55);
+  --notes-bg: rgba(16, 17, 20, 0.9);
+
+  --footer-text: #c7ccd4;
+
+  --radius-lg: 22px;
+  --shadow: 0 10px 35px rgba(0, 0, 0, 0.75);
+
+  --danger: #ff3b4e;
+  --cancel-bg: #2f3137;
+  --cancel-text: #e5e7eb;
+  --modal-bg: #121316;
+  --auth-overlay-bg: linear-gradient(160deg, #050506, #101114);
+  --page-bg-color: #050506;
+  --overlay-tint: 0, 0, 0;
+  --top-card-border: rgba(200, 205, 215, 0.28);
+  --off-bg: rgba(60, 62, 70, 0.5);
+  --off-border: rgba(160, 166, 178, 0.4);
+  --off-text: #9aa0ab;
+  --hover-border: #cfd4dc;
+  --hover-glow: rgba(207, 212, 220, 0.28);
+  --title-shadow:
+    0 0 10px rgba(220, 225, 235, 0.35),
+    0 0 26px rgba(220, 225, 235, 0.2),
+    0 3px 14px rgba(0, 0, 0, 0.85);
+  --h2-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
 /* ======================================================
    ОСНОВА
    ====================================================== */
@@ -2046,7 +2096,8 @@ footer .footer-line {
 @media print {
 
   /* Тъмната тема на хартия: светли цветове */
-  :root[data-theme="starry"] {
+  :root[data-theme="starry"],
+  :root[data-theme="domino"] {
     --ink: #000;
     --ink-soft: #555;
     --deep-heading: #000;
