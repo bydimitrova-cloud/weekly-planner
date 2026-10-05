@@ -2245,3 +2245,115 @@ footer .footer-line {
     page-break-before: avoid !important;
   }
 }
+
+/* ======================================================
+   ДЕСКТОП: Inter за целия интерфейс (кирилица)
+   Заглавията с Playfair Display си остават.
+   Не засяга мобилната версия (само мишка + екран > 834px)
+   ====================================================== */
+@media (min-width: 835px) and (hover: hover) and (pointer: fine) {
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Един общ шрифт за приложението. Бутоните и полетата го наследяват */
+  header.hero,
+  .wrap,
+  .theme-switcher-container,
+  .custom-modal-overlay,
+  .auth-overlay {
+    font-family: 'Inter', 'Montserrat', sans-serif;
+  }
+
+  /* По-големи размери на дребния текст */
+  .day-type-select {
+    font-size: 12.5px;
+    padding: 4px 6px;
+  }
+
+  .day-quick-add select,
+  .day-quick-add input {
+    font-size: 13px;
+    padding: 6px 8px;
+  }
+
+  .day-quick-add button {
+    font-size: 12.5px;
+    padding: 6px;
+  }
+
+  .calendar-task-item,
+  .free-task-item {
+    font-size: 13px;
+  }
+
+  .calendar-task-item input[type="text"].edit-input,
+  .free-task-item input[type="text"].edit-input {
+    font-size: 13px;
+  }
+
+  .slot-header-info {
+    font-size: 12px;
+  }
+
+  .day-date {
+    font-size: 12px;
+  }
+
+  .reminder-item {
+    font-size: 13.5px;
+  }
+
+  .link-item {
+    font-size: 13.5px;
+  }
+
+  .notebook-cover-sub {
+    font-size: 12.5px;
+  }
+
+  .notebook-item-preview {
+    font-size: 12.5px;
+  }
+
+  .notebook-item-body {
+    font-size: 13px;
+  }
+
+  .notebook-empty {
+    font-size: 13px;
+  }
+
+  .quote-footer {
+    font-size: 12px;
+  }
+
+  .radio-status {
+    font-size: 12px;
+  }
+
+  .week-nav-btns button {
+    font-size: 13px;
+  }
+
+  .theme-btn {
+    font-size: 13.5px;
+  }
+
+  #notebookOpenBtn {
+    font-size: 13.5px;
+  }
+
+  .custom-modal-btns button {
+    font-size: 13.5px;
+  }
+
+  /* Плейсхолдърите да не са толкова бледи */
+  input::placeholder,
+  textarea::placeholder {
+    opacity: 1;
+  }
+}
