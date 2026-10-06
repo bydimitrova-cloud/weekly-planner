@@ -87,24 +87,20 @@ GitHub, се появява на живо след 1–2 минути.
 
 - `theme-sakura.webp`
 - `theme-sea.webp`
+- `theme-fengshui.webp`
+- `theme-starry.webp`
 - `theme-domino.webp` — генерирано на 4.10.2026 г.
-
-<!-- TODO: допълни източника на theme-fengshui.webp и theme-starry.webp -->
 
 ### Иконки и изображения
 
-<!-- TODO: допълни откъде са favicon.png, apple-touch-icon.png и notebook.png -->
+Иконките са създадени с помощта на Gemini (Google):
+
+- `notebook.png` — генерирано на 6.10.2026 г.
+- `favicon.png` — производен на `notebook.png`, преоразмерен
+- `apple-touch-icon.png` — производен на `notebook.png`, преоразмерен
 
 ### Шрифтове и външни услуги
 
 - Playfair Display и Montserrat — Google Fonts (Open Font License)
 - Supabase JS (зарежда се от cdn.jsdelivr.net) — вход и база данни
 - Zucca Radio — стрийм на radiohype.gr, вграден чрез iframe; не се хоства от проекта
-
-### Вдъхновение за началния екран
-
-Анимацията на заглавието (буквите се проявяват от размазано състояние и
-думите се сменят) е вдъхновена от начална страница на шаблон във v0/Vercel
-(„COMPUTE“) и е пренаписана на чист JavaScript и CSS, без React и Tailwind.
-
-<!-- TODO: добави автора и лиценза на шаблона, след като ги провериш -->
