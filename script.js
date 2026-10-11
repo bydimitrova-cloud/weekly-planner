@@ -108,22 +108,34 @@ modalConfirmBtn.addEventListener('click', () => {
 });
 
 // Радио
+const RADIO_STREAM_URL = 'https://stream.zeno.fm/mtk7a6rnsfhvv';
 const playBtn = document.getElementById('radioPlayBtn');
 const statusEl = document.getElementById('radioStatus');
-const radioIframe = document.getElementById('radioIframe');
+const radioAudio = document.getElementById('radioAudio');
 let isRadioPlaying = false;
 
-playBtn.addEventListener('click', () => {
-  if (!isRadioPlaying) {
-    radioIframe.src = "https://radiohype.gr/live/zucca";
+function stopRadio() {
+  radioAudio.pause();
+  radioAudio.removeAttribute('src');
+  radioAudio.load();
+  playBtn.textContent = '▶';
+  statusEl.textContent = 'Спряно';
+  isRadioPlaying = false;
+}
+
+playBtn.addEventListener('click', async () => {
+  if (isRadioPlaying) { stopRadio(); return; }
+  try {
+    statusEl.textContent = 'Свързване...';
+    radioAudio.src = RADIO_STREAM_URL;
+    await radioAudio.play();
     playBtn.textContent = '❚❚';
     statusEl.textContent = 'В ефир...';
     isRadioPlaying = true;
-  } else {
-    radioIframe.src = "about:blank";
-    playBtn.textContent = '▶';
-    statusEl.textContent = 'Спряно';
-    isRadioPlaying = false;
+  } catch (e) {
+    console.error('Радиото не стартира:', e);
+    stopRadio();
+    statusEl.textContent = 'Няма връзка';
   }
 });
 
@@ -344,10 +356,7 @@ document.getElementById('forgotPasswordLink').addEventListener('click', async (e
 });
 
 document.getElementById('logoutBtn').addEventListener('click', () => {
-  if (isRadioPlaying) {
-    radioIframe.src = "about:blank";
-    isRadioPlaying = false;
-  }
+  if (isRadioPlaying) stopRadio();
   sb.auth.signOut();
 });
 
